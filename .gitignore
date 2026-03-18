@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+src/routeTree.gen.ts
+.output/
+.vinxi/
+app.config.timestamp_*

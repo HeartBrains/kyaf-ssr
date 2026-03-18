@@ -1,0 +1,14 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { lazy } from 'react';
+import { useAppNavigate } from '../../bkkk/utils/useAppNavigate';
+
+const HomePage = lazy(() =>
+  import('../../bkkk/components/pages/HomePage').then((m) => ({ default: m.HomePage }))
+);
+
+function HomePageRoute() {
+  const navigate = useAppNavigate();
+  return <HomePage onNavigate={navigate} />;
+}
+
+export const Route = createFileRoute('/bkkk/')({ component: HomePageRoute });
