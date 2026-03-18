@@ -1,3 +1,13 @@
-// Entry point is app/client.tsx for TanStack Start SSR.
-// This file is kept for editor tooling compatibility only.
-export {};
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { RouterProvider } from '@tanstack/react-router';
+import { createRouter } from './router';
+import './index.css';
+
+const router = createRouter();
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>,
+);

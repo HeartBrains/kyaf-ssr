@@ -20,47 +20,21 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Build
         run: npm run build
 
-      - name: Deploy .output to Hostinger
+      - name: Deploy to Hostinger
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
-          path: .output/
-          remote_path: ${{ secrets.HOSTINGER_DEPLOY_PATH }}/.output/
+          path: dist/
+          remote_path: ${{ secrets.HOSTINGER_DEPLOY_PATH }}
           remote_host: ${{ secrets.HOSTINGER_SSH_HOST }}
           remote_port: ${{ secrets.HOSTINGER_SSH_PORT }}
           remote_user: ${{ secrets.HOSTINGER_SSH_USER }}
           remote_key: ${{ secrets.HOSTINGER_SSH_KEY }}
-
-      - name: Deploy ecosystem.config.js to Hostinger
-        uses: burnett01/rsync-deployments@7.0.1
-        with:
-          switches: -avz
-          path: ecosystem.config.js
-          remote_path: ${{ secrets.HOSTINGER_DEPLOY_PATH }}/
-          remote_host: ${{ secrets.HOSTINGER_SSH_HOST }}
-          remote_port: ${{ secrets.HOSTINGER_SSH_PORT }}
-          remote_user: ${{ secrets.HOSTINGER_SSH_USER }}
-          remote_key: ${{ secrets.HOSTINGER_SSH_KEY }}
-
-      - name: Restart PM2 on Hostinger
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.HOSTINGER_SSH_HOST }}
-          port: ${{ secrets.HOSTINGER_SSH_PORT }}
-          username: ${{ secrets.HOSTINGER_SSH_USER }}
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
-          script: |
-            export PATH=/opt/alt/alt-nodejs24/root/usr/bin:/home/u202460562/.npm-global/bin:$PATH
-            cd ${{ secrets.HOSTINGER_DEPLOY_PATH }}
-            pm2 describe kyaf-ssr > /dev/null 2>&1 \
-              && pm2 restart kyaf-ssr \
-              || pm2 start ecosystem.config.js
-            pm2 save
 
       - name: Mirror to GitLab
         run: |
