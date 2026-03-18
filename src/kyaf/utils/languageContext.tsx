@@ -7,6 +7,6 @@ export { LanguageProvider };
 
 export function useLanguage() {
   const { language, setLanguage } = useLanguageState();
-  const t = (key: string) => getTranslation(key, language);
+  const t = (key: string) => getTranslation(language, key);
   return { language, setLanguage, t };
 }
