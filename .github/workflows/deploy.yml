@@ -11,6 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -63,4 +65,4 @@ jobs:
       - name: Mirror to GitLab
         run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/mrolim77/kyaf-ssr.git
-          git push gitlab main --force
+          git push gitlab main
