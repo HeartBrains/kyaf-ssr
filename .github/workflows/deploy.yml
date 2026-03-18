@@ -23,23 +23,25 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to Hostinger via rsync
+      - name: Deploy .output to Hostinger
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
           path: .output/
           remote_path: ${{ secrets.HOSTINGER_DEPLOY_PATH }}/.output/
           remote_host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          remote_port: ${{ secrets.HOSTINGER_SSH_PORT }}
           remote_user: ${{ secrets.HOSTINGER_SSH_USER }}
           remote_key: ${{ secrets.HOSTINGER_SSH_KEY }}
 
-      - name: Copy ecosystem.config.js to Hostinger
+      - name: Deploy ecosystem.config.js to Hostinger
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avz
           path: ecosystem.config.js
           remote_path: ${{ secrets.HOSTINGER_DEPLOY_PATH }}/
           remote_host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          remote_port: ${{ secrets.HOSTINGER_SSH_PORT }}
           remote_user: ${{ secrets.HOSTINGER_SSH_USER }}
           remote_key: ${{ secrets.HOSTINGER_SSH_KEY }}
 
@@ -47,6 +49,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
           username: ${{ secrets.HOSTINGER_SSH_USER }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           script: |
