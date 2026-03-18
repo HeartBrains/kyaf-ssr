@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bkkk.art/sitemap.xml
+Sitemap: https://khaoyaiart.bkkkapp.com/sitemap.xml
 Sitemap: https://khaoyaiartforest.com/sitemap.xml

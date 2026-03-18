@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const BKKK_BASE_URL = import.meta.env.VITE_BKKK_BASE_URL ?? 'https://bkkk.art';
+const BKKK_BASE_URL = import.meta.env.VITE_BKKK_BASE_URL ?? 'https://khaoyaiart.bkkkapp.com';
 const KYAF_BASE_URL = import.meta.env.VITE_KYAF_BASE_URL ?? 'https://khaoyaiartforest.com';
 
 export const BKKK_DEFAULT_OG_IMAGE = `${BKKK_BASE_URL}/og-bkkk.jpg`;

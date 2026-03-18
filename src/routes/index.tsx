@@ -7,7 +7,7 @@ function LandingRoute() {
   useSEO({
     title: 'Bangkok Kunsthalle / Khao Yai Art Forest',
     description: 'Two contemporary art spaces in Thailand — Bangkok Kunsthalle and Khao Yai Art Forest.',
-    canonical: 'https://bkkk.art',
+    canonical: 'https://khaoyaiart.bkkkapp.com',
   });
   return (
     <LandingPage
