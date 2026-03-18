@@ -36,6 +36,7 @@ function BkkkLayout() {
       <Header
         onMenuClick={() => setIsMenuOpen(!isMenuOpen)}
         onLogoClick={() => navigateRouter({ to: '/' })}
+        isTransparent={!scrolled}
         isScrolled={scrolled}
       />
       <MenuOverlay
