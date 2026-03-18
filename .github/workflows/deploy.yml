@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
 
 jobs:
   build-and-deploy:
@@ -14,18 +16,58 @@ jobs:
         with:
           fetch-depth: 0
 
+      # ── Change detection (scheduled/dispatch runs only) ──────────────────────
+      # Queries both WP instances for the latest modified timestamp across all
+      # CPTs. Uses that timestamp as a cache key — a hit means nothing changed.
+      - name: Check WP content for changes
+        id: check
+        if: github.event_name != 'push'
+        env:
+          VITE_KYAF_BASE_URL: ${{ secrets.VITE_KYAF_BASE_URL }}
+        run: |
+          chmod +x scripts/check-wp-modified.sh
+          LATEST=$(scripts/check-wp-modified.sh)
+          echo "latest_modified=$LATEST" >> "$GITHUB_OUTPUT"
+
+      - name: Restore change-detection cache
+        id: cache
+        if: github.event_name != 'push' && steps.check.outputs.latest_modified != ''
+        uses: actions/cache@v4
+        with:
+          path: .wp-modified-sentinel
+          key: wp-modified-${{ steps.check.outputs.latest_modified }}
+
+      - name: Skip if content unchanged
+        if: github.event_name != 'push' && steps.cache.outputs.cache-hit == 'true'
+        run: |
+          echo "No WP changes detected, skipping build."
+          echo "SKIP_BUILD=true" >> "$GITHUB_ENV"
+
+      # ── Build & deploy ───────────────────────────────────────────────────────
       - uses: actions/setup-node@v4
+        if: env.SKIP_BUILD != 'true'
         with:
           node-version: 20
           cache: npm
 
       - name: Install dependencies
+        if: env.SKIP_BUILD != 'true'
         run: npm ci
 
       - name: Build
+        if: env.SKIP_BUILD != 'true'
         run: npm run build
+        env:
+          VITE_BKKK_BASE_URL: ${{ secrets.VITE_BKKK_BASE_URL }}
+          VITE_KYAF_BASE_URL: ${{ secrets.VITE_KYAF_BASE_URL }}
+
+      # Write sentinel file so the cache is populated after a successful build
+      - name: Update change-detection cache
+        if: env.SKIP_BUILD != 'true' && steps.check.outputs.latest_modified != ''
+        run: echo "${{ steps.check.outputs.latest_modified }}" > .wp-modified-sentinel
 
       - name: Deploy to Hostinger
+        if: env.SKIP_BUILD != 'true'
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
@@ -37,6 +79,7 @@ jobs:
           remote_key: ${{ secrets.HOSTINGER_SSH_KEY }}
 
       - name: Mirror to GitLab
+        if: env.SKIP_BUILD != 'true'
         run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/mrolim77/kyaf-ssr.git
           git push gitlab main

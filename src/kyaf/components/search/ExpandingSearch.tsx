@@ -5,7 +5,7 @@ import { SearchDialog } from './SearchDialog';
 import { cn } from '../ui/utils';
 
 interface ExpandingSearchProps {
-    onNavigate?: (page: string) => void;
+    onNavigate?: (page: string, slug?: string) => void;
     className?: string;
     iconClassName?: string;
     inputClassName?: string;

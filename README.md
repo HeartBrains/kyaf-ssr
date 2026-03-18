@@ -50,6 +50,41 @@ mkdir -p ~/kyaf-ssr
 cd ~/kyaf-ssr && pm2 start ecosystem.config.js && pm2 save && pm2 startup
 ```
 
+## Scheduled Rebuilds
+
+The workflow also runs on a **hourly cron** (`0 * * * *`). Before building, it queries both WP instances for the latest `modified` timestamp across all CPTs. If the timestamp matches the previous build's cache key, the build is skipped — no unnecessary Puppeteer runs.
+
+### How it works
+
+1. Hostinger cron fires a `curl` to GitHub's `workflow_dispatch` API every hour
+2. The workflow checks WP for content changes via `scripts/check-wp-modified.sh`
+3. Cache hit → skip; cache miss → full build + deploy
+
+### Hostinger cron command
+
+In Hostinger's cron panel, add a job running every hour with this command:
+
+```bash
+curl -s -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer <GITHUB_PAT>" \
+  https://api.github.com/repos/HeartBrains/kyaf-ssr/actions/workflows/deploy.yml/dispatches \
+  -d '{"ref":"main"}'
+```
+
+Replace `<GITHUB_PAT>` with a GitHub Personal Access Token that has the **`workflow`** scope.
+
+> The token is visible in Hostinger's cron panel — rotate it if panel access is shared.
+
+### Additional GitHub Secrets required
+
+| Secret | Description |
+|--------|-------------|
+| `VITE_BKKK_BASE_URL` | Base URL for BKKK site (e.g. `https://bkkk.art`) |
+| `VITE_KYAF_BASE_URL` | Base URL for KYAF site (e.g. `https://khaoyaiartforest.com`) |
+
+These are used both for canonical URLs in the build and for the WP change-detection check.
+
 ## GitLab Mirror
 
 This repo is mirrored to `gitlab.com/mrolim77/kyaf-ssr` on every push to `main`.

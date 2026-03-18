@@ -268,8 +268,8 @@ export function MenuOverlay({ isOpen, onClose, onNavigate, activePage }: MenuOve
                     <div className="flex items-center gap-6">
                         {siteConfig.menu.search && (
                           <ExpandingSearch 
-                              onNavigate={(page) => {
-                                  onNavigate(page);
+                              onNavigate={(page, slug) => {
+                                  onNavigate(page, slug);
                                   onClose();
                               }}
                               className="gap-2"
@@ -278,7 +278,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate, activePage }: MenuOve
                           />
                         )}
                         <a 
-                            href="https://kyaf.thaicms.com"
+                            href="/kyaf"
                             className="text-[18px] text-white font-normal hover:text-gray-300 transition-colors uppercase tracking-wide"
                         >
                             KYAF

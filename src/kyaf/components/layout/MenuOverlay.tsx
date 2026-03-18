@@ -271,8 +271,8 @@ export function MenuOverlay({ isOpen, onClose, onNavigate, activePage }: MenuOve
                 >
                     <div className="flex items-center gap-6">
                         <ExpandingSearch 
-                            onNavigate={(page) => {
-                                onNavigate(page);
+                            onNavigate={(page, slug) => {
+                                onNavigate(page, slug);
                                 onClose();
                             }}
                             className="gap-2"
@@ -280,7 +280,7 @@ export function MenuOverlay({ isOpen, onClose, onNavigate, activePage }: MenuOve
                             inputClassName="w-40 text-lg text-white placeholder:text-gray-500"
                         />
                         <a 
-                            href="https://bkk.thaicms.com"
+                            href="/bkkk"
                             className="text-xl md:text-2xl text-white font-normal hover:text-gray-300 transition-colors uppercase tracking-wide cursor-pointer"
                         >
                             BKKK
