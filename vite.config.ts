@@ -11,8 +11,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 
 // Load CJS-only packages via require to avoid ESM/CJS conflict
-const vitePrerender = require('vite-plugin-prerender');
+const _vitePrerender = require('vite-plugin-prerender');
 const PuppeteerRenderer = require('./node_modules/vite-plugin-prerender/node_modules/@prerenderer/renderer-puppeteer/index.js');
+
+// Wrap vite-plugin-prerender so a Puppeteer launch failure (e.g. missing system
+// libs on shared hosting) degrades gracefully instead of crashing the build.
+function vitePrerender(options: Parameters<typeof _vitePrerender>[0]) {
+  const plugin = _vitePrerender(options);
+  return {
+    ...plugin,
+    async closeBundle() {
+      try {
+        await plugin.closeBundle?.();
+      } catch (err) {
+        console.warn('[prerender] Skipped: Puppeteer could not launch.', (err as Error).message);
+      }
+    },
+  };
+}
 
 const BKKK_BASE_URL = (process.env.VITE_BKKK_BASE_URL ?? '').trim() || 'https://khaoyaiart.bkkkapp.com';
 
