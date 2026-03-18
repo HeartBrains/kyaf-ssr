@@ -89,73 +89,73 @@ const IndexRoute = IndexImport.update({
 const KyafIndexRoute = KyafIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const BkkkIndexRoute = BkkkIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const KyafVisitRoute = KyafVisitImport.update({
   id: '/visit',
   path: '/visit',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafTeamRoute = KyafTeamImport.update({
   id: '/team',
   path: '/team',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafSupportRoute = KyafSupportImport.update({
   id: '/support',
   path: '/support',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafShopRoute = KyafShopImport.update({
   id: '/shop',
   path: '/shop',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafResidencyRoute = KyafResidencyImport.update({
   id: '/residency',
   path: '/residency',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafPressRoute = KyafPressImport.update({
   id: '/press',
   path: '/press',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafNewsRoute = KyafNewsImport.update({
   id: '/news',
   path: '/news',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafHiddenAssetsRoute = KyafHiddenAssetsImport.update({
   id: '/hidden-assets',
   path: '/hidden-assets',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafContactRoute = KyafContactImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafArchivesRoute = KyafArchivesImport.update({
   id: '/archives',
   path: '/archives',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyaflayoutRoute = KyaflayoutImport.update({
@@ -166,61 +166,61 @@ const KyaflayoutRoute = KyaflayoutImport.update({
 const BkkkVisitRoute = BkkkVisitImport.update({
   id: '/visit',
   path: '/visit',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkTeamRoute = BkkkTeamImport.update({
   id: '/team',
   path: '/team',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkSupportRoute = BkkkSupportImport.update({
   id: '/support',
   path: '/support',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkShopRoute = BkkkShopImport.update({
   id: '/shop',
   path: '/shop',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkResidencyRoute = BkkkResidencyImport.update({
   id: '/residency',
   path: '/residency',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkPressRoute = BkkkPressImport.update({
   id: '/press',
   path: '/press',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkNewsRoute = BkkkNewsImport.update({
   id: '/news',
   path: '/news',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkHiddenAssetsRoute = BkkkHiddenAssetsImport.update({
   id: '/hidden-assets',
   path: '/hidden-assets',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkContactRoute = BkkkContactImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkArchivesRoute = BkkkArchivesImport.update({
   id: '/archives',
   path: '/archives',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkklayoutRoute = BkkklayoutImport.update({
@@ -231,133 +231,133 @@ const BkkklayoutRoute = BkkklayoutImport.update({
 const KyafExhibitionsIndexRoute = KyafExhibitionsIndexImport.update({
   id: '/exhibitions/',
   path: '/exhibitions/',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafBlogIndexRoute = KyafBlogIndexImport.update({
   id: '/blog/',
   path: '/blog/',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafActivitiesIndexRoute = KyafActivitiesIndexImport.update({
   id: '/activities/',
   path: '/activities/',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafAboutIndexRoute = KyafAboutIndexImport.update({
   id: '/about/',
   path: '/about/',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const BkkkMovingImageIndexRoute = BkkkMovingImageIndexImport.update({
   id: '/moving-image/',
   path: '/moving-image/',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkExhibitionsIndexRoute = BkkkExhibitionsIndexImport.update({
   id: '/exhibitions/',
   path: '/exhibitions/',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkBlogIndexRoute = BkkkBlogIndexImport.update({
   id: '/blog/',
   path: '/blog/',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkActivitiesIndexRoute = BkkkActivitiesIndexImport.update({
   id: '/activities/',
   path: '/activities/',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkAboutIndexRoute = BkkkAboutIndexImport.update({
   id: '/about/',
   path: '/about/',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const KyafExhibitionsSlugRoute = KyafExhibitionsSlugImport.update({
   id: '/exhibitions/$slug',
   path: '/exhibitions/$slug',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafBlogSlugRoute = KyafBlogSlugImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafArtistsSlugRoute = KyafArtistsSlugImport.update({
   id: '/artists/$slug',
   path: '/artists/$slug',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafActivitiesSlugRoute = KyafActivitiesSlugImport.update({
   id: '/activities/$slug',
   path: '/activities/$slug',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafAboutVisionRoute = KyafAboutVisionImport.update({
   id: '/about/vision',
   path: '/about/vision',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const KyafAboutHistoryRoute = KyafAboutHistoryImport.update({
   id: '/about/history',
   path: '/about/history',
-  getParentRoute: () => KyafRoute,
+  getParentRoute: () => KyaflayoutRoute,
 } as any)
 
 const BkkkMovingImageSlugRoute = BkkkMovingImageSlugImport.update({
   id: '/moving-image/$slug',
   path: '/moving-image/$slug',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkExhibitionsSlugRoute = BkkkExhibitionsSlugImport.update({
   id: '/exhibitions/$slug',
   path: '/exhibitions/$slug',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkBlogSlugRoute = BkkkBlogSlugImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkArtistsSlugRoute = BkkkArtistsSlugImport.update({
   id: '/artists/$slug',
   path: '/artists/$slug',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkActivitiesSlugRoute = BkkkActivitiesSlugImport.update({
   id: '/activities/$slug',
   path: '/activities/$slug',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkAboutVisionRoute = BkkkAboutVisionImport.update({
   id: '/about/vision',
   path: '/about/vision',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 const BkkkAboutHistoryRoute = BkkkAboutHistoryImport.update({
   id: '/about/history',
   path: '/about/history',
-  getParentRoute: () => BkkkRoute,
+  getParentRoute: () => BkkklayoutRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
