@@ -59,14 +59,10 @@ export interface Activity {
   };
 }
 
-// Image constants
-const IMG_KBAR = "https://lirp.cdn-website.com/5516674f/dms3rep/multi/opt/Z44YyZbqstJ99oE8_03K-Bar_PhotobyAndreaRossetti-1920w.jpg";
+const BASE = 'https://lirp.cdn-website.com/5516674f/dms3rep/multi/opt/Puma_Khao+Yai+Art+Forest+Images+for+Website-4.+Activities-';
 
-/**
- * Activities Data
- * Single activity example
- */
 export const activities: Activity[] = [
+  // ─── K-BAR Experience ───────────────────────────────────────────────────────
   {
     id: "1",
     slug: "k-bar-experience",
@@ -88,13 +84,15 @@ export const activities: Activity[] = [
       en: ['Event', 'Social', 'Gastronomy'],
       th: ['กิจกรรม', 'สังคม', 'อาหารและเครื่องดื่ม']
     },
-    featuredImage: IMG_KBAR,
+    featuredImage: BASE + 'K-BAR+Experience--K-BAR-+Andrea+Rossetti+4+-+COVER-1920w.jpg',
     gallery: [
-      IMG_KBAR,
-      "https://lirp.cdn-website.com/5516674f/dms3rep/multi/opt/K-Bar-exterior-night-1920w.jpg",
-      "https://lirp.cdn-website.com/5516674f/dms3rep/multi/opt/K-Bar-interior-details-1920w.jpg"
+      BASE + 'K-BAR+Experience--K-BAR-+Andrea+Rossetti+6+-+Copy-1920w.jpg',
+      BASE + 'K-BAR+Experience--K-BAR+Menu-+Rungkit+Tangtongpon+1-1920w.jpg',
+      BASE + 'K-BAR+Experience--K-BAR+Menu-+Rungkit+Tangtongpon+3-1920w.jpg',
+      BASE + 'K-BAR+Experience--K-BAR+Menu-+Rungkit+Tangtongpon+5-1920w.jpg',
+      BASE + 'K-BAR+Experience--K-BAR+Menu-+Rungkit+Tangtongpon+6-1920w.jpg',
     ],
-    imageCredits: "Photo by Andrea Rossetti, Chinnakit Ruenma, Rungkit Tangtongpon",
+    imageCredits: "Photo by Andrea Rossetti, Rungkit Tangtongpon",
     listingSummary: {
       en: "An intimate bar experience open once a month, offering craft cocktails in the heart of the forest.",
       th: "ประสบการณ์บาร์สุดพิเศษที่เปิดเดือนละครั้ง เสิร์ฟค็อกเทลคราฟท์ท่ามกลางป่า"
@@ -107,7 +105,67 @@ export const activities: Activity[] = [
       en: "Monthly Event",
       th: "กิจกรรมรายเดือน"
     }
-  }
+  },
+
+  // ─── Bamboo Journey ──────────────────────────────────────────────────────────
+  {
+    id: "2",
+    slug: "bamboo-journey",
+    title: { en: "Bamboo Journey", th: "Bamboo Journey" },
+    dateDisplay: { en: "", th: "" },
+    status: 'current',
+    year: "2025",
+    categories: { en: [], th: [] },
+    featuredImage: BASE + 'Bamboo+Journey--Food-+Nawaphon+20+COVER-1920w.jpg',
+    gallery: [
+      BASE + 'Bamboo+Journey--Activity+-+People-+Puttisin+4-1920w.jpg',
+      BASE + 'Bamboo+Journey--Food-+Rungkit+-+Pongsakorn+1-1920w.jpg',
+      BASE + 'Bamboo+Journey--Food-+Nawaphon+11-1920w.jpg',
+      BASE + 'Bamboo+Journey--Food-+Nawaphon+23-1920w.jpg',
+      BASE + 'Bamboo+Journey--Activity+-+People-+Rungkit+-+Pongsakorn+4-1920w.jpg',
+      BASE + 'Bamboo+Journey--Food-+Nawaphon+25-1920w.jpg',
+    ],
+    listingSummary: { en: "", th: "" },
+  },
+
+  // ─── Forest Table ────────────────────────────────────────────────────────────
+  {
+    id: "3",
+    slug: "forest-table",
+    title: { en: "Forest Table", th: "Forest Table" },
+    dateDisplay: { en: "", th: "" },
+    status: 'current',
+    year: "2025",
+    categories: { en: [], th: [] },
+    featuredImage: BASE + 'Forest+Table--2B2A0548+COVER-1920w.jpg',
+    gallery: [
+      BASE + 'Forest+Table--481324010_17942258174959752_1210894244914354469_n-1920w.jpg',
+      BASE + 'Forest+Table--Activity+-+People-+Puttisin+5-1920w.jpg',
+      BASE + 'Forest+Table--2B2A0558-1920w.jpg',
+      BASE + 'Forest+Table--Activity+-+People-+Rungkit+-+Pongsakorn+7-1920w.jpg',
+      BASE + 'Forest+Table--2B2A0548-1920w.jpg',
+    ],
+    listingSummary: { en: "", th: "" },
+  },
+
+  // ─── Forest Print ────────────────────────────────────────────────────────────
+  {
+    id: "4",
+    slug: "forest-print",
+    title: { en: "Forest Print", th: "Forest Print" },
+    dateDisplay: { en: "", th: "" },
+    status: 'current',
+    year: "2025",
+    categories: { en: [], th: [] },
+    featuredImage: BASE + 'Forest+Print--Activity+-+People-+Nawaphon-+Film+60+COVER-1920w.jpg',
+    gallery: [
+      BASE + 'Forest+Print--Activity+-+People-+Nawaphon-+Film+7-1920w.jpg',
+      BASE + 'Forest+Print--Activity+-+People-+Nawaphon-+Film+58-1920w.jpg',
+      BASE + 'Forest+Print--Activity+-+People-+Nawaphon-+Film+59-1920w.jpg',
+      BASE + 'Forest+Print--Activity+-+People-+Nawaphon-+Film+60-1920w.jpg',
+    ],
+    listingSummary: { en: "", th: "" },
+  },
 ];
 
 /**

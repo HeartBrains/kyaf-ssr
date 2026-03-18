@@ -10,24 +10,20 @@ import {
 } from "../ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef, useState, useEffect } from 'react';
-import { WPPost } from '../../utils/types';
 import { Reveal } from '../ui/Reveal';
 import { VisitInfo } from './sections/VisitInfo';
 import { useLanguage } from '../../utils/languageContext';
-import { getMockPost } from '../../utils/mockDataBilingual';
+import { useActivityBySlug } from '../../../lib/useWPData';
 
 interface ActivityDetailPageProps {
   onNavigate: (page: string) => void;
-  activity?: WPPost;
   slug?: string;
   backPage?: string;
 }
 
-export function ActivityDetailPage({ onNavigate, activity, slug, backPage }: ActivityDetailPageProps) {
+export function ActivityDetailPage({ onNavigate, slug, backPage }: ActivityDetailPageProps) {
   const { language, t } = useLanguage();
-  const [postData, setPostData] = useState<WPPost | undefined>(activity);
-  const [loading, setLoading] = useState(!activity && !!slug);
-  const [error, setError] = useState(false);
+  const { data: postData, loading, error } = useActivityBySlug(slug ?? '', 'bkkk');
 
   const plugin = useRef(
     Autoplay({ delay: 4000, stopOnInteraction: true })
@@ -35,28 +31,7 @@ export function ActivityDetailPage({ onNavigate, activity, slug, backPage }: Act
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
 
-  useEffect(() => {
-    if (activity) {
-        setPostData(activity);
-        setLoading(false);
-        return;
-    }
-    
-    if (slug) {
-        setLoading(true);
-        // Use bilingual mock data instead of API
-        const data = getMockPost(slug, language);
-        if (data) {
-            setPostData(data);
-            setLoading(false);
-        } else {
-            setError(true);
-            setLoading(false);
-        }
-    }
-  }, [activity, slug, language]);
-
-  // Carousel logic (only if postData exists)
+  // Carousel logic
   useEffect(() => {
     if (!api) return
     setCurrent(api.selectedScrollSnap())
@@ -68,10 +43,15 @@ export function ActivityDetailPage({ onNavigate, activity, slug, backPage }: Act
   if (loading) return <div className="min-h-screen flex items-center justify-center font-sans">{t('common.loading')}</div>;
   if (error || !postData) return <div className="min-h-screen flex items-center justify-center font-sans text-red-500">{language === 'th' ? 'ไม่พบกิจกรรม' : 'Activity not found.'}</div>;
 
-  // Use gallery from postData or fallback to featured image
-  const galleryImages = postData.gallery && postData.gallery.length > 0 
-    ? postData.gallery 
-    : (postData.featuredImage ? [postData.featuredImage.sourceUrl] : []);
+  const title = language === 'th' ? postData.title.th : postData.title.en;
+  const dateDisplay = language === 'th' ? postData.dateDisplay.th : postData.dateDisplay.en;
+  const content = language === 'th' ? postData.content.th : postData.content.en;
+  const categories = language === 'th' ? postData.categories.th : postData.categories.en;
+
+  // Use gallery or fallback to featured image
+  const galleryImages = postData.gallery && postData.gallery.length > 0
+    ? postData.gallery
+    : (postData.featuredImage ? [postData.featuredImage] : []);
 
   return (
     <div className="w-full bg-white min-h-screen pb-24">
@@ -88,7 +68,7 @@ export function ActivityDetailPage({ onNavigate, activity, slug, backPage }: Act
                   <CarouselItem key={index} className="h-full pl-0">
                      <ImageWithFallback
                         src={src}
-                        alt={`${postData.title} Gallery ${index + 1}`}
+                        alt={`${title} Gallery ${index + 1}`}
                         className="w-full h-full object-cover opacity-90"
                      />
                   </CarouselItem>
@@ -142,45 +122,23 @@ export function ActivityDetailPage({ onNavigate, activity, slug, backPage }: Act
             <div className="md:col-span-6 flex flex-col gap-8">
                 <div className="flex flex-col gap-0 px-0 md:px-[28px] py-[0px]">
                     <h1 className={`text-xl md:text-2xl font-normal text-black leading-tight ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
-                       {postData.title}
+                       {title}
                     </h1>
 
-                    {postData.categories?.map((cat, idx) => (
+                    {categories.map((cat, idx) => (
                         <p key={idx} className={`text-xl md:text-2xl font-normal text-black leading-tight ${language === 'th' ? 'leading-[1.82em]' : ''}`}>{cat}</p>
                     ))}
-                    
-                    {postData.date && (
-                        <p className={`text-xl md:text-2xl text-black font-normal leading-tight ${language === 'th' ? 'leading-[1.82em]' : ''}`}>{postData.date}</p>
-                    )}
-                    
-                    {postData.acf?.curator && (
-                        <p className={`text-xl md:text-2xl text-black font-normal leading-tight ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
-                            {language === 'th' ? 'ภัณฑารักษ์: ' : 'Curated by '}{postData.acf.curator}
-                        </p>
+
+                    {dateDisplay && (
+                        <p className={`text-xl md:text-2xl text-black font-normal leading-tight ${language === 'th' ? 'leading-[1.82em]' : ''}`}>{dateDisplay}</p>
                     )}
                 </div>
             </div>
 
             {/* Right Column */}
             <div className={`md:col-start-7 md:col-span-6 text-xl md:text-2xl text-black font-normal leading-tight ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
-                {postData.content && (
-                    <div className="[&>p]:mb-8" dangerouslySetInnerHTML={{ __html: postData.content }} />
-                )}
-
-                {postData.acf?.schedule && (
-                    <div className="mt-12 pt-8 border-t border-gray-200">
-                      <h3 className={`text-xl md:text-2xl font-normal mb-4 text-black leading-tight ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
-                          {language === 'th' ? 'ตารางกิจกรรม' : 'Schedule'}
-                      </h3>
-                      <div className={`space-y-2 text-xl md:text-2xl text-black font-normal leading-tight ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
-                         {postData.acf.schedule.map((item: any, idx: number) => (
-                             <p key={idx}><span className="font-normal">{item.title}</span> {item.details}</p>
-                         ))}
-                         {postData.acf.additionalContent && (
-                             <p className="mt-4 text-black">{postData.acf.additionalContent}</p>
-                         )}
-                      </div>
-                    </div>
+                {content && (
+                    <div className="[&>p]:mb-8" dangerouslySetInnerHTML={{ __html: content }} />
                 )}
              </div>
          </div>

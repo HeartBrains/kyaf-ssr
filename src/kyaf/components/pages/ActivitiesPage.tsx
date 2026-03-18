@@ -3,7 +3,7 @@ import { Reveal } from '../ui/Reveal';
 import { ParallaxHero } from '../ui/ParallaxHero';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../utils/languageContext';
-import { activities, type Activity } from '../../utils/activitiesDataNew';
+import { useKyafActivities } from '../../../lib/useWPData';
 import { ACTIVITY_HERO_IMAGE } from '../../utils/imageConstants';
 
 interface ActivitiesPageProps {
@@ -18,6 +18,7 @@ export function ActivitiesPage({ onNavigate, activeSection }: ActivitiesPageProp
     (activeSection as Category) || 'current'
   );
   const { language } = useLanguage();
+  const { data: activities } = useKyafActivities();
 
   // Update activeCategory when activeSection prop changes
   useEffect(() => {

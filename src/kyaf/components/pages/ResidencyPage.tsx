@@ -1,11 +1,13 @@
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Reveal } from '../ui/Reveal';
-import { useState } from 'react';
+import { ParallaxHero } from '../ui/ParallaxHero';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '../../utils/languageContext';
 import { getTranslation } from '../../utils/translations';
 import { IMG_FOG_SRC, IMG_PULSUS_SRC } from '../../utils/imageConstants';
+import { useResidencyArtists } from '../../../lib/useWPData';
 
 interface ResidencyPageProps {
   onNavigate?: (page: string, slug?: string) => void;
@@ -14,6 +16,7 @@ interface ResidencyPageProps {
 
 export function ResidencyPage({ onNavigate, activeSection }: ResidencyPageProps) {
   const { language } = useLanguage();
+  const { data: ARTISTS_DATA } = useResidencyArtists();
   const [activeCategory, setActiveCategory] = useState<'current' | 'upcoming' | 'past'>(
     (activeSection === 'previous' ? 'past' : activeSection as 'current' | 'upcoming' | 'past') || 'current'
   );
@@ -26,7 +29,7 @@ export function ResidencyPage({ onNavigate, activeSection }: ResidencyPageProps)
     }
   }, [activeSection]);
 
-  const filteredArtists = ARTISTS_DATA.filter(artist => artist.category === activeCategory);
+  const filteredArtists = ARTISTS_DATA.filter(artist => artist.status === activeCategory);
 
   return (
     <div className="w-full bg-white min-h-screen pb-24 font-sans">
@@ -88,7 +91,7 @@ export function ResidencyPage({ onNavigate, activeSection }: ResidencyPageProps)
                             >
                                 <div className="aspect-[3/4] w-full bg-gray-100 relative overflow-hidden">
                                     <ImageWithFallback 
-                                        src={artist.category === 'current' ? IMG_PULSUS_SRC : artist.image}
+                                        src={artist.status === 'current' ? IMG_PULSUS_SRC : artist.featuredImage}
                                         alt={language === 'th' ? artist.nameTH : artist.name}
                                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                     />

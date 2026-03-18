@@ -3,7 +3,7 @@ import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Reveal } from '../ui/Reveal';
 import { ParallaxHero } from '../ui/ParallaxHero';
 import { useLanguage } from '../../utils/languageContext';
-import { getMockPostsByType } from '../../utils/mockDataBilingual';
+import { useBkkkActivities } from '../../../lib/useWPData';
 
 interface ActivitiesPageProps {
   onNavigate: (page: string, slug?: string) => void;
@@ -12,15 +12,19 @@ interface ActivitiesPageProps {
 
 export function ActivitiesPage({ onNavigate, targetSectionId }: ActivitiesPageProps) {
   const { language, t } = useLanguage();
+  const { data: rawActivities } = useBkkkActivities();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  // Get all activities in current language
-  const allActivities = getMockPostsByType('activity', language);
-
-  // Map activities to include tags
-  const activitiesWithTags = allActivities.map(activity => ({
-    ...activity,
-    tags: activity.categories || ['Performance'] // Use categories as tags
+  // Normalise WP shape to the flat shape the rest of this component expects
+  const activitiesWithTags = rawActivities.map(activity => ({
+    id: activity.id,
+    slug: activity.slug,
+    title: language === 'th' ? activity.title.th : activity.title.en,
+    date: language === 'th' ? activity.dateDisplay.th : activity.dateDisplay.en,
+    featuredImage: { sourceUrl: activity.featuredImage },
+    tags: (language === 'th' ? activity.categories.th : activity.categories.en).length
+      ? (language === 'th' ? activity.categories.th : activity.categories.en)
+      : ['Performance'],
   }));
 
   const tags = language === 'th' 

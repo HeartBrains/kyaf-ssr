@@ -13,7 +13,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Reveal } from '../ui/Reveal';
 import { VisitInfo } from './sections/VisitInfo';
 import { useLanguage } from '../../utils/languageContext';
-import { getActivityBySlug, type Activity } from '../../utils/activitiesDataNew';
+import { useActivityBySlug } from '../../../lib/useWPData';
 import { getDetailContentByLanguage } from '../../utils/detailContent';
 import { useScrollHide } from '../../utils/useScrollHide';
 
@@ -25,9 +25,7 @@ interface ActivityDetailPageProps {
 
 export function ActivityDetailPage({ onNavigate, slug, backPage }: ActivityDetailPageProps) {
   const { language, t } = useLanguage();
-  const [activityData, setActivityData] = useState<Activity | null>(null);
-  const [loading, setLoading] = useState(!!slug);
-  const [error, setError] = useState(false);
+  const { data: activityData, loading, error } = useActivityBySlug(slug ?? '', 'kyaf');
   const { isScrolling } = useScrollHide();
 
   const plugin = useRef(
@@ -35,21 +33,6 @@ export function ActivityDetailPage({ onNavigate, slug, backPage }: ActivityDetai
   )
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
-
-  useEffect(() => {
-    if (slug) {
-        setLoading(true);
-        // Use new data structure directly
-        const activity = getActivityBySlug(slug);
-        if (activity) {
-            setActivityData(activity);
-            setLoading(false);
-        } else {
-            setError(true);
-            setLoading(false);
-        }
-    }
-  }, [slug]);
 
   // Carousel logic
   useEffect(() => {
@@ -64,8 +47,8 @@ export function ActivityDetailPage({ onNavigate, slug, backPage }: ActivityDetai
   if (error || !activityData) return <div className="min-h-screen flex items-center justify-center font-sans text-red-500">{language === 'th' ? 'ไม่พบกิจกรรม' : 'Activity not found.'}</div>;
 
   // Use gallery from activity data or fallback to featured image
-  const galleryImages = activityData.gallery && activityData.gallery.length > 0 
-    ? activityData.gallery 
+  const galleryImages = activityData.gallery && activityData.gallery.length > 0
+    ? activityData.gallery
     : [activityData.featuredImage];
 
   // Get detailed content from detailContent files

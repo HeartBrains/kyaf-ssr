@@ -1,7 +1,7 @@
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ParallaxHero } from '../ui/ParallaxHero';
 import { Reveal } from '../ui/Reveal';
-import { ARTISTS_DATA } from '../../utils/residencyData';
+import { useResidencyArtists } from '../../../lib/useWPData';
 import { useLanguage } from '../../utils/languageContext';
 import { getTranslation } from '../../utils/translations';
 import { useState, useEffect } from 'react';
@@ -14,6 +14,7 @@ interface ResidencyPageProps {
 
 export function ResidencyPage({ onNavigate, targetSectionId }: ResidencyPageProps) {
   const { language } = useLanguage();
+  const { data: ARTISTS_DATA } = useResidencyArtists();
   const [activeSection, setActiveSection] = useState('current-artists');
 
   // Helper function to extract year and month from period string
