@@ -3,6 +3,7 @@ module.exports = {
     {
       name: 'kyaf-ssr',
       script: '.output/server/index.mjs',
+      interpreter: '/opt/alt/alt-nodejs24/root/usr/bin/node',
       instances: 1,
       autorestart: true,
       watch: false,

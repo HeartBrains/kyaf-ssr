@@ -53,6 +53,7 @@ jobs:
           username: ${{ secrets.HOSTINGER_SSH_USER }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           script: |
+            export PATH=/opt/alt/alt-nodejs24/root/usr/bin:/home/u202460562/.npm-global/bin:$PATH
             cd ${{ secrets.HOSTINGER_DEPLOY_PATH }}
             pm2 describe kyaf-ssr > /dev/null 2>&1 \
               && pm2 restart kyaf-ssr \
