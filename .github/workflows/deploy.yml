@@ -10,6 +10,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # Prevent the scheduled/dispatch build from re-triggering itself via GitLab mirror
+    if: github.actor != 'github-actions[bot]'
 
     steps:
       - uses: actions/checkout@v4
@@ -17,8 +19,6 @@ jobs:
           fetch-depth: 0
 
       # ── Change detection (scheduled/dispatch runs only) ──────────────────────
-      # Queries both WP instances for the latest modified timestamp across all
-      # CPTs. Uses that timestamp as a cache key — a hit means nothing changed.
       - name: Check WP content for changes
         id: check
         if: github.event_name != 'push'
@@ -54,7 +54,6 @@ jobs:
         if: env.SKIP_BUILD != 'true'
         run: npm ci
 
-      # Chromium system libraries required by vite-plugin-prerender / Puppeteer
       - name: Install Chromium dependencies
         if: env.SKIP_BUILD != 'true'
         run: |
@@ -72,7 +71,6 @@ jobs:
           VITE_BKKK_BASE_URL: ${{ secrets.VITE_BKKK_BASE_URL }}
           VITE_KYAF_BASE_URL: ${{ secrets.VITE_KYAF_BASE_URL }}
 
-      # Write sentinel file so the cache is populated after a successful build
       - name: Update change-detection cache
         if: env.SKIP_BUILD != 'true' && steps.check.outputs.latest_modified != ''
         run: echo "${{ steps.check.outputs.latest_modified }}" > .wp-modified-sentinel
@@ -89,8 +87,10 @@ jobs:
           remote_user: ${{ secrets.HOSTINGER_SSH_USER }}
           remote_key: ${{ secrets.HOSTINGER_SSH_KEY }}
 
+      # Only mirror on direct pushes — not on scheduled/dispatch runs
+      # This prevents a push→GitLab→GitHub→push loop
       - name: Mirror to GitLab
-        if: env.SKIP_BUILD != 'true'
+        if: env.SKIP_BUILD != 'true' && github.event_name == 'push'
         run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/mrolim77/kyaf-ssr.git
           git push gitlab main
