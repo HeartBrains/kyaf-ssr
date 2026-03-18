@@ -1,239 +1,194 @@
-# Full Content Migration to WordPress Spec
+# Spec: Static Prerendering + Full SEO Meta Tags
 
 ## Problem Statement
 
-All real content currently hardcoded in TypeScript data files needs to be migrated into WordPress via WP-CLI scripts run over SSH. This covers both BKKK and KYAF sites. Press items are skipped (placeholder data only). KYAF has no residency artists. Full HTML body content from `detailContent.ts` is included. After migration, the frontend will be wired to consume the WordPress REST API.
+The site is a Vite SPA deployed on Hostinger (Apache, no Node runtime). Search engines receive a blank `index.html` until JavaScript executes, making most content invisible to crawlers. The fix is two-part:
+
+1. **Static prerendering** — generate real HTML for every route at build time using `vite-plugin-prerender`
+2. **Per-page meta tags** — inject `<title>`, `<meta description>`, Open Graph, Twitter Card, and `<link rel="canonical">` into each prerendered HTML file
 
 ---
 
-## Environment
+## Constraints
 
-- **WordPress**: `content.bkkkapp.com`, WP-CLI available via SSH
-- **SSH**: `u202460562@72.61.122.41` port `65002`
-- **Method**: WP-CLI `wp eval-file` PHP scripts — automated, all at once
-- **Forms**: JetFormBuilder forms built after migration for future manual updates
-
----
-
-## Content Inventory
-
-### BKKK Exhibitions (`exhibitionsDataNew.ts`) — 16 records
-| Slug | Status |
-|---|---|
-| nine-plus-five-works | past |
-| nostalgia-for-unity | past |
-| mend-piece | past |
-| like-nouns-slipping-into-verbs | past |
-| calligraphic-abstraction | past |
-| painting-as-event | past |
-| poetics-of-horizontality | past |
-| this-page-is-intentionally-left-blank | past |
-| mitta-del-santi | past |
-| vernacular-objects | past |
-| description-without-place | past |
-| forever-love-soul-engine | past |
-| blind-spots-panels-paravents-and-screens | past |
-| soul-searching | past |
-| splendor-in-the-city | past |
-| a-bit-fountain-and-a-bit-not | past |
-| dial-a-poem-thailand | past |
-
-Full HTML body content from `detailContent.ts` migrated to `content_en` meta field.
-
-### BKKK Moving Image Programs (`movingImageData.ts`) — 7 records
-| Slug | Status |
-|---|---|
-| upcoming-program-2026 | upcoming |
-| infringes | past |
-| search-for-life-i | past |
-| shapeshifting-spaces | past |
-| we-gather | past |
-| seeds | past |
-| inviting-you-to-die-with-me | current |
-
-Full HTML body content from `detailContent.ts` migrated to `content_en`.
-
-### BKKK Residency Artists (`residencyData.ts`) — 10 records
-| Slug | Status |
-|---|---|
-| upcoming-artist-2026 | upcoming |
-| emma-mccormick-goodhart | past |
-| natalie-bruck | past |
-| cole-lu | past |
-| nicolas-amato | past |
-| anthony-huberman | past |
-| spencer-sweeney | past |
-| luca-lo-pinto | past |
-| eduardo-williams | past |
-| apichaya-wannakit | past |
-
-Full HTML bio/statement content from `detailContent.ts` migrated to `bio_en`.
-
-### BKKK Team Members (`teamDataBilingual.ts`) — ~20 records
-All real names and roles. Groups: founder, directors, team, advisory-board.
-
-### BKKK Activities (`mockDataBilingual.ts` + new from previous spec) — 6 records
-- unwinding-architecture (exhibition type — skip, already in exhibitions)
-- art-as-reflection (blog post type — migrate to blog_post CPT)
-- concrete-ghosts-becoming-human (upcoming)
-- concrete-ghosts-white-building (upcoming)
-- club-pluto (upcoming)
-- tagteams-2026 (upcoming)
-
-### KYAF Exhibitions (`exhibitionsDataNew.ts`) — 10 records
-| Slug | Status |
-|---|---|
-| madrid-circle | current |
-| khao-yai-fog-forrest | current |
-| god | current |
-| two-planets-series | current |
-| pulsus-vitae | current |
-| k-bar | current |
-| pilgrimage-to-eternity | current |
-| maman | past |
-| light-shadow-2025 | past |
-| earth-tones-2025 | past |
-
-Full HTML body content from KYAF `detailContent.ts` migrated to `content_en`.
-
-### KYAF Activities (`activitiesDataNew.ts`) — 4 records
-- k-bar-experience (current)
-- forest-print (current) — from previous spec
-- bamboo-journey-lunch (current) — from previous spec
-- forest-table-dinner (current) — from previous spec
-
-### KYAF Team Members (`teamDataBilingual.ts`) — ~15 records
-All real names and roles.
-
-### Skipped
-- Press items (both sites) — placeholder data, skip
-- KYAF Residency — no data exists
+- Hostinger shared/cloud hosting — Apache only, no Node.js runtime
+- Must remain a static file deployment (no server process)
+- TanStack Router (file-based) already handles client-side routing
+- WP API (`https://content.bkkkapp.com/wp-json/wp/v2`) is available at build time to fetch slugs for dynamic routes
+- `.htaccess` already rewrites all requests to `index.html` — prerendered files will be served directly by Apache before the rewrite fires
 
 ---
 
-## Migration Approach
+## Approach: `vite-plugin-prerender`
 
-### One PHP script per CPT, executed via `wp eval-file`
+`vite-plugin-prerender` runs a headless browser (Puppeteer) after the Vite build, visits each URL, and saves the rendered HTML. This is the standard approach for Vite SPAs on static hosts.
 
-Each script:
-1. Reads data hardcoded as a PHP array (transcribed from TypeScript source)
-2. Creates a WP post with `wp_insert_post()`
-3. Sets all meta fields with `update_post_meta()`
-4. Sets `site` meta field (`bkkk` or `kyaf`)
-5. Is idempotent — checks for existing slug before inserting to allow re-runs
+**Alternative considered and rejected:** `@tanstack/router-plugin` prerender — requires TanStack Start (not set up). `vite-ssg` — requires Vue. Custom Puppeteer script — more maintenance.
 
-### Scripts to create (run in order)
+---
 
-| Script | CPT | Site |
+## Routes to Prerender
+
+### Static routes (always prerendered)
+```
+/
+/bkkk
+/bkkk/exhibitions
+/bkkk/activities
+/bkkk/moving-image
+/bkkk/residency
+/bkkk/about
+/bkkk/about/history
+/bkkk/about/vision
+/bkkk/team
+/bkkk/visit
+/bkkk/contact
+/bkkk/support
+/bkkk/press
+/bkkk/shop
+/bkkk/blog
+/bkkk/archives
+/kyaf
+/kyaf/exhibitions
+/kyaf/activities
+/kyaf/residency
+/kyaf/about
+/kyaf/about/history
+/kyaf/about/vision
+/kyaf/team
+/kyaf/visit
+/kyaf/contact
+/kyaf/support
+/kyaf/press
+/kyaf/shop
+/kyaf/blog
+/kyaf/archives
+```
+
+### Dynamic routes (slugs fetched from WP API at build time, fallback to static data files)
+
+| Route pattern | WP endpoint | Fallback static file |
 |---|---|---|
-| `migrate-bkkk-exhibitions.php` | exhibition | bkkk |
-| `migrate-bkkk-moving-image.php` | moving_image | bkkk |
-| `migrate-bkkk-residency.php` | residency_artist | bkkk |
-| `migrate-bkkk-team.php` | team_member | bkkk |
-| `migrate-bkkk-activities.php` | activity | bkkk |
-| `migrate-kyaf-exhibitions.php` | exhibition | kyaf |
-| `migrate-kyaf-activities.php` | activity | kyaf |
-| `migrate-kyaf-team.php` | team_member | kyaf |
+| `/bkkk/exhibitions/$slug` | `exhibitions?site=bkkk` | `bkkk/utils/exhibitionsDataNew.ts` (17 slugs) |
+| `/bkkk/moving-image/$slug` | `moving-images?site=bkkk` | `bkkk/utils/movingImageData.ts` (7 slugs) |
+| `/bkkk/artists/$slug` | `residency-artists?site=bkkk` | `bkkk/utils/residencyData.ts` (10 slugs) |
+| `/bkkk/activities/$slug` | `activities?site=bkkk` | `bkkk/utils/activitiesDataNew.ts` (3 slugs) |
+| `/kyaf/exhibitions/$slug` | `exhibitions?site=kyaf` | `kyaf/utils/exhibitionsDataNew.ts` (10 slugs) |
+| `/kyaf/activities/$slug` | `activities?site=kyaf` | `kyaf/utils/activitiesDataNew.ts` (4 slugs) |
+| `/kyaf/artists/$slug` | `residency-artists?site=kyaf` | none (skip if WP empty) |
 
-### Field Mapping
+---
 
-**Exhibition → WP CPT `exhibition`**
-- `post_title` ← `title.en`
-- `post_name` ← `slug`
-- `post_status` ← `publish`
-- `title_th` ← `title.th`
-- `artist_en` ← `artist.en`
-- `artist_th` ← `artist.th`
-- `curator_en` ← `curator.en`
-- `curator_th` ← `curator.th`
-- `from_date` ← `fromDate`
-- `to_date` ← `toDate`
-- `date_display_en` ← `dateDisplay.en`
-- `date_display_th` ← `dateDisplay.th`
-- `year` ← `year`
-- `status` ← `status`
-- `featured_image_url` ← `featuredImage`
-- `gallery` ← serialized `gallery[]`
-- `image_credits` ← `imageCredits`
-- `tags_en` ← `tags`
-- `content_en` ← HTML from `detailContent.ts` matched by slug
-- `site` ← `bkkk` or `kyaf`
+## Meta Tags — Per Page
 
-**Moving Image → WP CPT `moving_image`**
-Same as Exhibition plus:
-- `films` ← serialized array of `{ title, artist, year, duration, description }`
+### Utility: `src/lib/seo.ts`
+A `useSEO(meta)` hook that uses `document.title` and injects/updates `<meta>` tags in `<head>` on mount. Works both client-side and is picked up by the prerenderer.
 
-**Residency Artist → WP CPT `residency_artist`**
-- `post_title` ← `name`
-- `post_name` ← `slug`
-- `status` ← `status`
-- `bio_en` ← HTML from `detailContent.ts` matched by slug
-- `featured_image_url` ← `featuredImage`
-- `gallery` ← serialized `gallery[]`
-- `site` ← `bkkk`
+Fields:
+```ts
+interface SEOMeta {
+  title: string;          // "<Page Title> | Bangkok Kunsthalle" or "| Khao Yai Art Forest"
+  description: string;
+  image?: string;         // absolute URL, defaults to site OG image
+  canonical?: string;     // absolute URL for this page
+  type?: 'website' | 'article';  // defaults to 'website'
+}
+```
 
-**Team Member → WP CPT `team_member`**
-- `post_title` ← `name`
-- `role_en` ← `role`
-- `role_th` ← `roleTH`
-- `group` ← group key
-- `order` ← position in array
-- `site` ← `bkkk` or `kyaf`
+Tags injected:
+- `<title>`
+- `<meta name="description">`
+- `<meta property="og:title">`
+- `<meta property="og:description">`
+- `<meta property="og:image">`
+- `<meta property="og:url">`
+- `<meta property="og:type">`
+- `<meta name="twitter:card">` = `summary_large_image`
+- `<meta name="twitter:title">`
+- `<meta name="twitter:description">`
+- `<meta name="twitter:image">`
+- `<link rel="canonical">`
 
-**Activity → WP CPT `activity`**
-- `post_title` ← `title.en` (KYAF) or `titleEN` (BKKK)
-- `post_name` ← `slug`
-- `title_th` ← `title.th`
-- `date_display_en` ← `dateDisplay.en`
-- `date_display_th` ← `dateDisplay.th`
-- `status` ← `status`
-- `categories_en` ← `categories.en` joined
-- `content_en` ← `listingSummary.en` (KYAF) or content body (BKKK)
-- `featured_image_url` ← `featuredImage`
-- `site` ← `bkkk` or `kyaf`
+### Site defaults
+- **BKKK**: title suffix `| Bangkok Kunsthalle`, base URL `https://bkkk.art` (or env var `VITE_BKKK_BASE_URL`)
+- **KYAF**: title suffix `| Khao Yai Art Forest`, base URL `https://khaoyaiartforest.com` (or env var `VITE_KYAF_BASE_URL`)
+- Default OG image: site hero image (existing figma asset)
+
+### Per-page meta content
+
+**Static pages** — hardcoded strings in each route component:
+
+| Route | Title | Description |
+|---|---|---|
+| `/` | Bangkok Kunsthalle / Khao Yai Art Forest | Two contemporary art spaces in Thailand |
+| `/bkkk` | Bangkok Kunsthalle | Contemporary art space in Bangkok |
+| `/bkkk/exhibitions` | Exhibitions | Bangkok Kunsthalle exhibitions |
+| `/bkkk/activities` | Activities | Events and activities at Bangkok Kunsthalle |
+| `/bkkk/moving-image` | Moving Image | Moving image programs at Bangkok Kunsthalle |
+| `/bkkk/residency` | Residency | Artist residency program at Bangkok Kunsthalle |
+| `/bkkk/about` | About | About Bangkok Kunsthalle |
+| `/bkkk/team` | Team | The team behind Bangkok Kunsthalle |
+| `/bkkk/visit` | Visit | How to visit Bangkok Kunsthalle |
+| `/bkkk/contact` | Contact | Contact Bangkok Kunsthalle |
+| `/kyaf` | Khao Yai Art Forest | Contemporary art space in Khao Yai |
+| `/kyaf/exhibitions` | Exhibitions | Khao Yai Art Forest exhibitions |
+| `/kyaf/activities` | Activities | Events and activities at Khao Yai Art Forest |
+| (etc.) | (pattern follows above) | |
+
+**Dynamic detail pages** — meta derived from fetched data:
+- `title`: `{exhibition.title.en} | Bangkok Kunsthalle`
+- `description`: `{exhibition.listingSummary.en}` or first 160 chars of content
+- `image`: `{exhibition.featuredImage}`
+- `canonical`: `https://bkkk.art/bkkk/exhibitions/{slug}`
+
+---
+
+## `robots.txt`
+
+```
+User-agent: *
+Allow: /
+
+Sitemap: https://bkkk.art/sitemap.xml
+Sitemap: https://khaoyaiartforest.com/sitemap.xml
+```
+
+## `sitemap.xml`
+
+Generated at build time by a Vite plugin or build script. Lists all static + dynamic URLs with `<lastmod>` = build date. One file covering both sites (or two separate files).
 
 ---
 
 ## Implementation Steps
 
-1. **Restore SSH key** — add new public key to Hostinger `authorized_keys`
-2. **Run CPT + meta field setup** (from previous spec) via `wp eval-file setup-cpts.php`
-3. **Add CORS headers** to `.htaccess`
-4. **Write and run migration scripts** in order (8 scripts total)
-5. **Verify REST API** — spot-check each CPT endpoint returns correct records
-6. **Wire frontend** — `src/lib/wp-api.ts`, `src/lib/wp-mappers.ts`, `src/lib/useWPData.ts`
-7. **Replace Exhibitions** static import with WP hook (BKKK + KYAF)
-8. **Replace remaining CPTs** one at a time (Moving Image, Activities, Residency, Team)
-9. **Run `npm run build`** — verify no errors
-10. **Commit and push** — CI deploys to Hostinger
+1. **Install** `vite-plugin-prerender` (and Puppeteer as peer dep)
+2. **Create `scripts/get-prerender-routes.ts`** — fetches slugs from WP API at build time, falls back to static data files, returns full list of URLs to prerender
+3. **Update `vite.config.ts`** — add prerender plugin, pass route list from step 2
+4. **Create `src/lib/seo.ts`** — `useSEO()` hook
+5. **Add `useSEO()` to each static route component** — hardcoded meta per page
+6. **Add `useSEO()` to each dynamic detail route** — meta derived from fetched data
+7. **Add `public/robots.txt`**
+8. **Add sitemap generation** to build script (simple XML output from same slug list)
+9. **Add env vars** `VITE_BKKK_BASE_URL` and `VITE_KYAF_BASE_URL` to `.env.example`
+10. **Test build** — verify prerendered HTML files contain correct `<title>` and `<meta>` tags
+11. **Commit and push**
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] SSH key restored and server accessible
-- [ ] All 7 CPTs created with correct meta fields
-- [ ] CORS headers present — `Access-Control-Allow-Origin: *`
-- [ ] BKKK: 17 exhibitions in WP with full HTML content
-- [ ] BKKK: 7 moving image programs in WP
-- [ ] BKKK: 10 residency artists in WP
-- [ ] BKKK: ~20 team members in WP
-- [ ] BKKK: 4 activities in WP (Concrete Ghosts ×2, cluB pluto, TagTEAMS)
-- [ ] KYAF: 10 exhibitions in WP
-- [ ] KYAF: 4 activities in WP
-- [ ] KYAF: ~15 team members in WP
-- [ ] `site` filter works correctly for all CPTs
-- [ ] Frontend Exhibitions page (BKKK + KYAF) renders from WP data
-- [ ] All other CPT pages render from WP data
-- [ ] `npm run build` passes
-- [ ] Static data files kept as reference (not deleted)
+- `npm run build` completes without errors
+- `dist/bkkk/exhibitions/nine-plus-five-works/index.html` exists and contains `<title>Nine Plus Five Works | Bangkok Kunsthalle</title>`
+- `dist/bkkk/index.html` contains correct `og:title`, `og:description`, `og:image`
+- `dist/robots.txt` exists
+- `dist/sitemap.xml` exists and lists all prerendered URLs
+- Curl of any prerendered URL returns HTML with populated `<title>` (not empty)
+- Client-side navigation still works after hydration
 
 ---
 
-## What Is NOT in Scope
+## Known Limitations
 
-- Press items (both sites) — skipped
-- KYAF residency — no data
-- Thai translations for new activity content (placeholder EN used)
-- JetFormBuilder form creation (separate step after migration)
-- Search re-indexing
+- Prerender adds significant build time (Puppeteer visits every URL — ~60–80 pages)
+- Dynamic routes that don't exist in WP yet won't be prerendered until next build
+- Thai-language meta tags not included in this spec (EN only for now)
