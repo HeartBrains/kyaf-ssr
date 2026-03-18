@@ -1,6 +1,8 @@
 import { createFileRoute, useParams } from '@tanstack/react-router';
 import { lazy } from 'react';
 import { useAppNavigate } from '../../../bkkk/utils/useAppNavigate';
+import { useSEO, bkkkMeta } from '../../../lib/seo';
+import { useMovingImageBySlug } from '../../../lib/useWPData';
 
 const MovingImageDetailPage = lazy(() =>
   import('../../../bkkk/components/pages/MovingImageDetailPage').then((m) => ({ default: m.MovingImageDetailPage }))
@@ -24,12 +26,17 @@ async function fetchSlugData(slug: string, type: string, apiBase: string | undef
 function MovingImageDetailPageRoute() {
   const navigate = useAppNavigate();
   const { slug } = useParams({ strict: false }) as { slug: string };
+  const { data } = useMovingImageBySlug(slug);
+  const name = (data as any)?.title?.en ?? (data as any)?.name ?? slug;
+  const desc = (data as any)?.listingSummary?.en ?? (data as any)?.bio ?? '';
+  const img = (data as any)?.featuredImage ?? undefined;
+  useSEO(bkkkMeta(name, typeof desc === 'string' ? desc.replace(/<[^>]+>/g, '').slice(0, 160) : '', { path: `/bkkk/moving-image/${slug}`, image: img, type: 'article' }));
   return <MovingImageDetailPage onNavigate={navigate} slug={slug || 'inviting-you-to-die-with-me'} backPage={undefined} />;
 }
 
 export const Route = createFileRoute('/bkkk/moving-image/$slug')({
   loader: async ({ params }) => {
-    const apiBase = process.env.WORDPRESS_BKKK_API_URL;
+    const apiBase = import.meta.env.VITE_WP_BASE_URL;
     const data = await fetchSlugData(params.slug, 'moving-image', apiBase);
     return { slug: params.slug, wpData: data };
   },

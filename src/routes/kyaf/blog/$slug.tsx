@@ -29,7 +29,7 @@ function BlogDetailPageRoute() {
 
 export const Route = createFileRoute('/kyaf/blog/$slug')({
   loader: async ({ params }) => {
-    const apiBase = process.env.WORDPRESS_KYAF_API_URL;
+    const apiBase = import.meta.env.VITE_WP_BASE_URL;
     const data = await fetchSlugData(params.slug, 'post', apiBase);
     return { slug: params.slug, wpData: data };
   },

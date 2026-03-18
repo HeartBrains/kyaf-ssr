@@ -1,6 +1,8 @@
 import { createFileRoute, useParams } from '@tanstack/react-router';
 import { lazy } from 'react';
 import { useAppNavigate } from '../../../kyaf/utils/useAppNavigate';
+import { useSEO, kyafMeta } from '../../../lib/seo';
+import { useKyafExhibitionBySlug } from '../../../lib/useWPData';
 
 const ExhibitionDetailPage = lazy(() =>
   import('../../../kyaf/components/pages/ExhibitionDetailPage').then((m) => ({ default: m.ExhibitionDetailPage }))
@@ -24,12 +26,18 @@ async function fetchSlugData(slug: string, type: string, apiBase: string | undef
 function ExhibitionDetailPageRoute() {
   const navigate = useAppNavigate();
   const { slug } = useParams({ strict: false }) as { slug: string };
+  const { data } = useKyafExhibitionBySlug(slug);
+  useSEO(kyafMeta(
+    data?.title.en ?? slug,
+    data?.listingSummary?.en ?? data?.content?.en?.replace(/<[^>]+>/g, '').slice(0, 160) ?? '',
+    { path: `/kyaf/exhibitions/${slug}`, image: data?.featuredImage, type: 'article' },
+  ));
   return <ExhibitionDetailPage onNavigate={navigate} slug={slug || 'unwinding-architecture'} backPage={undefined} />;
 }
 
 export const Route = createFileRoute('/kyaf/exhibitions/$slug')({
   loader: async ({ params }) => {
-    const apiBase = process.env.WORDPRESS_KYAF_API_URL;
+    const apiBase = import.meta.env.VITE_WP_BASE_URL;
     const data = await fetchSlugData(params.slug, 'exhibition', apiBase);
     return { slug: params.slug, wpData: data };
   },

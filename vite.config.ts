@@ -3,13 +3,34 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import vitePrerender from 'vite-plugin-prerender';
+import Sitemap from 'vite-plugin-sitemap';
+import PuppeteerRenderer from '@prerenderer/renderer-puppeteer';
+import { getPrerenderRoutes } from './scripts/get-prerender-routes';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const BKKK_BASE_URL = process.env.VITE_BKKK_BASE_URL ?? 'https://bkkk.art';
+
+// Routes are fetched once and shared between prerender + sitemap plugins
+const routes = await getPrerenderRoutes();
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    vitePrerender({
+      staticDir: path.join(__dirname, 'dist'),
+      routes,
+      renderer: new PuppeteerRenderer({
+        renderAfterDocumentEvent: 'render-event',
+        headless: true,
+      }),
+    }),
+    Sitemap({
+      hostname: BKKK_BASE_URL,
+      dynamicRoutes: routes,
+    }),
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
