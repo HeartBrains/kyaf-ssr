@@ -14,7 +14,7 @@ const require = createRequire(import.meta.url);
 const vitePrerender = require('vite-plugin-prerender');
 const PuppeteerRenderer = require('./node_modules/vite-plugin-prerender/node_modules/@prerenderer/renderer-puppeteer/index.js');
 
-const BKKK_BASE_URL = process.env.VITE_BKKK_BASE_URL || 'https://bkkk.art';
+const BKKK_BASE_URL = (process.env.VITE_BKKK_BASE_URL ?? '').trim() || 'https://bkkk.art';
 
 // server.allowedHosts must be defined at the top level (not inside async factory)
 // so Vite applies it before the host check fires.
@@ -39,7 +39,7 @@ export default defineConfig(async () => {
       }),
       Sitemap({
         hostname: BKKK_BASE_URL,
-        dynamicRoutes: routes,
+        dynamicRoutes: routes.filter(r => r.startsWith('/')),
       }),
     ],
     resolve: {
