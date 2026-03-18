@@ -11,23 +11,31 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 
 // Load CJS-only packages via require to avoid ESM/CJS conflict
-const _vitePrerender = require('vite-plugin-prerender');
+const vitePrerender = require('vite-plugin-prerender');
 const PuppeteerRenderer = require('./node_modules/vite-plugin-prerender/node_modules/@prerenderer/renderer-puppeteer/index.js');
 
-// Wrap vite-plugin-prerender so a Puppeteer launch failure (e.g. missing system
-// libs on shared hosting) degrades gracefully instead of crashing the build.
-function vitePrerender(options: Parameters<typeof _vitePrerender>[0]) {
-  const plugin = _vitePrerender(options);
-  return {
-    ...plugin,
-    async closeBundle() {
-      try {
-        await plugin.closeBundle?.();
-      } catch (err) {
-        console.warn('[prerender] Skipped: Puppeteer could not launch.', (err as Error).message);
-      }
-    },
-  };
+// Resolve system Chromium — tried in order, first found wins.
+// The bundled Puppeteer binary is the final fallback (works on GitHub Actions
+// after apt-installing the required libs; may fail on some environments).
+function resolveChromium(): string | undefined {
+  const { execSync } = require('child_process');
+  const candidates = [
+    process.env.PUPPETEER_EXECUTABLE_PATH,
+    '/usr/bin/chromium-browser',
+    '/usr/bin/chromium',
+    '/usr/bin/google-chrome',
+    '/usr/bin/google-chrome-stable',
+  ];
+  for (const p of candidates) {
+    if (!p) continue;
+    try {
+      execSync(`test -x "${p}"`, { stdio: 'ignore' });
+      console.log(`[prerender] Using Chromium at: ${p}`);
+      return p;
+    } catch { /* not found, try next */ }
+  }
+  console.log('[prerender] No system Chromium found, using bundled Puppeteer binary.');
+  return undefined;
 }
 
 const BKKK_BASE_URL = (process.env.VITE_BKKK_BASE_URL ?? '').trim() || 'https://khaoyaiart.bkkkapp.com';
@@ -51,6 +59,8 @@ export default defineConfig(async () => {
         renderer: new PuppeteerRenderer({
           renderAfterDocumentEvent: 'render-event',
           headless: true,
+          executablePath: resolveChromium(),
+          args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
         }),
       }),
       Sitemap({

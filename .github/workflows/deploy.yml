@@ -54,15 +54,11 @@ jobs:
         if: env.SKIP_BUILD != 'true'
         run: npm ci
 
-      - name: Install Chromium dependencies
+      - name: Install Chromium
         if: env.SKIP_BUILD != 'true'
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y \
-            libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 \
-            libxi6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 \
-            libasound2t64 libatk1.0-0t64 libpangocairo-1.0-0 \
-            libgbm1 libgtk-3-0t64
+          sudo apt-get install -y chromium-browser
 
       - name: Build
         if: env.SKIP_BUILD != 'true'
@@ -70,6 +66,7 @@ jobs:
         env:
           VITE_BKKK_BASE_URL: ${{ secrets.VITE_BKKK_BASE_URL }}
           VITE_KYAF_BASE_URL: ${{ secrets.VITE_KYAF_BASE_URL }}
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium-browser
 
       - name: Update change-detection cache
         if: env.SKIP_BUILD != 'true' && steps.check.outputs.latest_modified != ''
