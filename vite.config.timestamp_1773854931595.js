@@ -1,0 +1,124 @@
+// vite.config.ts
+import { defineConfig } from "vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import { TanStackStart } from "@tanstack/react-start/plugin/vite";
+import path from "path";
+import { fileURLToPath } from "url";
+var __dirname = path.dirname(fileURLToPath(import.meta.url));
+var vite_config_default = defineConfig({
+  plugins: [
+    TanStackRouterVite({
+      routesDirectory: "./src/routes",
+      generatedRouteTree: "./src/routeTree.gen.ts"
+    }),
+    TanStackStart({
+      server: {
+        preset: "node-server"
+      }
+    })
+  ],
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+    alias: {
+      "figma:asset/eef054d9d2335ae6399ea1781db9290bf8a57720.png": path.resolve(__dirname, "./src/assets/eef054d9d2335ae6399ea1781db9290bf8a57720.png"),
+      "figma:asset/dd3cf84b511b0dad967af493508668a35209a4f8.png": path.resolve(__dirname, "./src/assets/dd3cf84b511b0dad967af493508668a35209a4f8.png"),
+      "figma:asset/cf64d0ac119d7726ae241c9d4cf05ce82a8d3c8c.png": path.resolve(__dirname, "./src/assets/cf64d0ac119d7726ae241c9d4cf05ce82a8d3c8c.png"),
+      "figma:asset/c62c64ac454fd8fd1b5ba6a64e8e3a9305f2f778.png": path.resolve(__dirname, "./src/assets/c62c64ac454fd8fd1b5ba6a64e8e3a9305f2f778.png"),
+      "figma:asset/9dae9d1894230d3eec6cdcd7ad979b5b951fc060.png": path.resolve(__dirname, "./src/assets/9dae9d1894230d3eec6cdcd7ad979b5b951fc060.png"),
+      "figma:asset/429c8ad61cdb4d502462d129e377fe4faf35abf2.png": path.resolve(__dirname, "./src/assets/429c8ad61cdb4d502462d129e377fe4faf35abf2.png"),
+      "figma:asset/33593f765d2a675d88ce409217db74d077b37979.png": path.resolve(__dirname, "./src/assets/33593f765d2a675d88ce409217db74d077b37979.png"),
+      "figma:asset/31ea28713060df0bb7786615b9851978be305cbd.png": path.resolve(__dirname, "./src/assets/31ea28713060df0bb7786615b9851978be305cbd.png"),
+      "figma:asset/2e3a0e5af1e1e13f82c48787eed213758894268f.png": path.resolve(__dirname, "./src/assets/2e3a0e5af1e1e13f82c48787eed213758894268f.png"),
+      "figma:asset/14d806eadf2be35c85e440c5a0a82ea2ac7ba651.png": path.resolve(__dirname, "./src/assets/14d806eadf2be35c85e440c5a0a82ea2ac7ba651.png"),
+      "figma:asset/0f2de5dba08e64ffdce936dae7d5cc24c7aeb07b.png": path.resolve(__dirname, "./src/assets/0f2de5dba08e64ffdce936dae7d5cc24c7aeb07b.png"),
+      "figma:asset/ff791599a7d27653fe9f81afddd80351d2203b53.png": path.resolve(__dirname, "./src/assets/ff791599a7d27653fe9f81afddd80351d2203b53.png"),
+      "figma:asset/fe6045862f4d9e81cf9cbe2b1306923c3d696089.png": path.resolve(__dirname, "./src/assets/fe6045862f4d9e81cf9cbe2b1306923c3d696089.png"),
+      "figma:asset/f876ff15d4a325a29125011d24ad2ca5ca66bb51.png": path.resolve(__dirname, "./src/assets/f876ff15d4a325a29125011d24ad2ca5ca66bb51.png"),
+      "figma:asset/ec999442b074fbac1df911057c8bb82a64cad895.png": path.resolve(__dirname, "./src/assets/ec999442b074fbac1df911057c8bb82a64cad895.png"),
+      "figma:asset/eac803c72b1f401001f34751077157becab055df.png": path.resolve(__dirname, "./src/assets/eac803c72b1f401001f34751077157becab055df.png"),
+      "figma:asset/e7c3b0a88080b577463007b9e6e5c54bbf9b1fa0.png": path.resolve(__dirname, "./src/assets/e7c3b0a88080b577463007b9e6e5c54bbf9b1fa0.png"),
+      "figma:asset/e4b9c70ac0b33be9a2541c9a6b47492e9354df1f.png": path.resolve(__dirname, "./src/assets/e4b9c70ac0b33be9a2541c9a6b47492e9354df1f.png"),
+      "figma:asset/e22c355f227be675506a95a918e1709b69f6b229.png": path.resolve(__dirname, "./src/assets/e22c355f227be675506a95a918e1709b69f6b229.png"),
+      "figma:asset/dc0432b031e6dfdb3b1344d72f195df3679fe4e8.png": path.resolve(__dirname, "./src/assets/dc0432b031e6dfdb3b1344d72f195df3679fe4e8.png"),
+      "figma:asset/dabc305335d39d2dbf5621f6fcb927792c8add21.png": path.resolve(__dirname, "./src/assets/dabc305335d39d2dbf5621f6fcb927792c8add21.png"),
+      "figma:asset/d943e42f7e9cd184f849b82dffcea308ae6b43d3.png": path.resolve(__dirname, "./src/assets/d943e42f7e9cd184f849b82dffcea308ae6b43d3.png"),
+      "figma:asset/c5b05166a77fe39de7d22b95a54df1ffcd700e14.png": path.resolve(__dirname, "./src/assets/c5b05166a77fe39de7d22b95a54df1ffcd700e14.png"),
+      "figma:asset/b76ea5166f18ab6e70485da83ec1e8e9fd55d6fa.png": path.resolve(__dirname, "./src/assets/b76ea5166f18ab6e70485da83ec1e8e9fd55d6fa.png"),
+      "figma:asset/b602c6fcb8c0e0c94fac7732e44d0776b18060a0.png": path.resolve(__dirname, "./src/assets/b602c6fcb8c0e0c94fac7732e44d0776b18060a0.png"),
+      "figma:asset/b3457c4396601c2404643bf2381bfecec43b4797.png": path.resolve(__dirname, "./src/assets/b3457c4396601c2404643bf2381bfecec43b4797.png"),
+      "figma:asset/a1a1118b6be54436ce0c9baf1800346619efcd46.png": path.resolve(__dirname, "./src/assets/a1a1118b6be54436ce0c9baf1800346619efcd46.png"),
+      "figma:asset/9eae500bdb07f8716e004e113057b5a47b2d86bd.png": path.resolve(__dirname, "./src/assets/9eae500bdb07f8716e004e113057b5a47b2d86bd.png"),
+      "figma:asset/93174aaa38e984342b3c7203ec474df53dd7d616.png": path.resolve(__dirname, "./src/assets/93174aaa38e984342b3c7203ec474df53dd7d616.png"),
+      "figma:asset/8e246e2ab08ea6847836a779350a6d9869881ed9.png": path.resolve(__dirname, "./src/assets/8e246e2ab08ea6847836a779350a6d9869881ed9.png"),
+      "figma:asset/7abfdc14b7238c5560d0bac14a8b2eb91ba476cc.png": path.resolve(__dirname, "./src/assets/7abfdc14b7238c5560d0bac14a8b2eb91ba476cc.png"),
+      "figma:asset/77077e55cf6127390fc16db00a7e8116a5a1b544.png": path.resolve(__dirname, "./src/assets/77077e55cf6127390fc16db00a7e8116a5a1b544.png"),
+      "figma:asset/6d7abb1eb5b0520ec0273ce72fdf2b6f10453106.png": path.resolve(__dirname, "./src/assets/6d7abb1eb5b0520ec0273ce72fdf2b6f10453106.png"),
+      "figma:asset/626871a24c0f30c7a5dcffdddabab9be84cd21be.png": path.resolve(__dirname, "./src/assets/626871a24c0f30c7a5dcffdddabab9be84cd21be.png"),
+      "figma:asset/5fe8c7bed8f861aca1e20f7ca58bfd75b0b28fab.png": path.resolve(__dirname, "./src/assets/5fe8c7bed8f861aca1e20f7ca58bfd75b0b28fab.png"),
+      "figma:asset/5e5fe5af7fc9a06cab3c5821b3896144f393d971.png": path.resolve(__dirname, "./src/assets/5e5fe5af7fc9a06cab3c5821b3896144f393d971.png"),
+      "figma:asset/5e140ec6d37cb7e0037ac051703f84bd597985db.png": path.resolve(__dirname, "./src/assets/5e140ec6d37cb7e0037ac051703f84bd597985db.png"),
+      "figma:asset/595911bc30911c24b0fc6829d3cd870a14de2f04.png": path.resolve(__dirname, "./src/assets/595911bc30911c24b0fc6829d3cd870a14de2f04.png"),
+      "figma:asset/55e19bb4b62b46613aa6cabcdd7e5f5e8086c619.png": path.resolve(__dirname, "./src/assets/55e19bb4b62b46613aa6cabcdd7e5f5e8086c619.png"),
+      "figma:asset/5002addf6336a4baec845f65b2c6154e56332044.png": path.resolve(__dirname, "./src/assets/5002addf6336a4baec845f65b2c6154e56332044.png"),
+      "figma:asset/4f773a5b5ab9818fa357421b67a232fb056aaeca.png": path.resolve(__dirname, "./src/assets/4f773a5b5ab9818fa357421b67a232fb056aaeca.png"),
+      "figma:asset/4f48b817b66d60c4af8382a11f6cd20dea9c25df.png": path.resolve(__dirname, "./src/assets/4f48b817b66d60c4af8382a11f6cd20dea9c25df.png"),
+      "figma:asset/4aaacc7db0768648c918cf11d1de85636d5b715f.png": path.resolve(__dirname, "./src/assets/4aaacc7db0768648c918cf11d1de85636d5b715f.png"),
+      "figma:asset/3aee81884c982f6a3494a9f241977094c9d2ef0f.png": path.resolve(__dirname, "./src/assets/3aee81884c982f6a3494a9f241977094c9d2ef0f.png"),
+      "figma:asset/39b167d3ecf1724478fcff10310ad52c1e7902e9.png": path.resolve(__dirname, "./src/assets/39b167d3ecf1724478fcff10310ad52c1e7902e9.png"),
+      "figma:asset/392e07b43cde7a4a6e9511578089afed1f432174.png": path.resolve(__dirname, "./src/assets/392e07b43cde7a4a6e9511578089afed1f432174.png"),
+      "figma:asset/333e45022861ad8d6b5f75dd9cb8b429f6dccc77.png": path.resolve(__dirname, "./src/assets/333e45022861ad8d6b5f75dd9cb8b429f6dccc77.png"),
+      "figma:asset/239813aeb18d747229ad9c689af4be38fdbb9c46.png": path.resolve(__dirname, "./src/assets/239813aeb18d747229ad9c689af4be38fdbb9c46.png"),
+      "figma:asset/131b2548dc118b39858ee0d21b4214fe923bd00f.png": path.resolve(__dirname, "./src/assets/131b2548dc118b39858ee0d21b4214fe923bd00f.png"),
+      "figma:asset/0d324eb9849fc5e2beb44923cc3e0b0173f0e867.png": path.resolve(__dirname, "./src/assets/0d324eb9849fc5e2beb44923cc3e0b0173f0e867.png"),
+      "figma:asset/0cec509a8de27fb0b79ccc6a098d36be6839f3d8.png": path.resolve(__dirname, "./src/assets/0cec509a8de27fb0b79ccc6a098d36be6839f3d8.png"),
+      "figma:asset/041dba8daa6d4b6a656bbd9e5fec194ba7f172e2.png": path.resolve(__dirname, "./src/assets/041dba8daa6d4b6a656bbd9e5fec194ba7f172e2.png"),
+      "figma:asset/02b4470c65a282e2fcae8a883fba8744978d6a9a.png": path.resolve(__dirname, "./src/assets/02b4470c65a282e2fcae8a883fba8744978d6a9a.png"),
+      "figma:asset/0071ef88c5b70f64f427c978c8989d4f2ff57cb1.png": path.resolve(__dirname, "./src/assets/0071ef88c5b70f64f427c978c8989d4f2ff57cb1.png"),
+      "vaul@1.1.2": "vaul",
+      "sonner@2.0.3": "sonner",
+      "recharts@2.15.2": "recharts",
+      "react-resizable-panels@2.1.7": "react-resizable-panels",
+      "react-hook-form@7.55.0": "react-hook-form",
+      "react-day-picker@8.10.1": "react-day-picker",
+      "next-themes@0.4.6": "next-themes",
+      "lucide-react@0.487.0": "lucide-react",
+      "input-otp@1.4.2": "input-otp",
+      "embla-carousel-react@8.6.0": "embla-carousel-react",
+      "cmdk@1.1.1": "cmdk",
+      "class-variance-authority@0.7.1": "class-variance-authority",
+      "@radix-ui/react-tooltip@1.1.8": "@radix-ui/react-tooltip",
+      "@radix-ui/react-toggle@1.1.2": "@radix-ui/react-toggle",
+      "@radix-ui/react-toggle-group@1.1.2": "@radix-ui/react-toggle-group",
+      "@radix-ui/react-tabs@1.1.3": "@radix-ui/react-tabs",
+      "@radix-ui/react-switch@1.1.3": "@radix-ui/react-switch",
+      "@radix-ui/react-slot@1.1.2": "@radix-ui/react-slot",
+      "@radix-ui/react-slider@1.2.3": "@radix-ui/react-slider",
+      "@radix-ui/react-separator@1.1.2": "@radix-ui/react-separator",
+      "@radix-ui/react-select@2.1.6": "@radix-ui/react-select",
+      "@radix-ui/react-scroll-area@1.2.3": "@radix-ui/react-scroll-area",
+      "@radix-ui/react-radio-group@1.2.3": "@radix-ui/react-radio-group",
+      "@radix-ui/react-progress@1.1.2": "@radix-ui/react-progress",
+      "@radix-ui/react-popover@1.1.6": "@radix-ui/react-popover",
+      "@radix-ui/react-navigation-menu@1.2.5": "@radix-ui/react-navigation-menu",
+      "@radix-ui/react-menubar@1.1.6": "@radix-ui/react-menubar",
+      "@radix-ui/react-label@2.1.2": "@radix-ui/react-label",
+      "@radix-ui/react-hover-card@1.1.6": "@radix-ui/react-hover-card",
+      "@radix-ui/react-dropdown-menu@2.1.6": "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-dialog@1.1.6": "@radix-ui/react-dialog",
+      "@radix-ui/react-context-menu@2.2.6": "@radix-ui/react-context-menu",
+      "@radix-ui/react-collapsible@1.1.3": "@radix-ui/react-collapsible",
+      "@radix-ui/react-checkbox@1.1.4": "@radix-ui/react-checkbox",
+      "@radix-ui/react-avatar@1.1.3": "@radix-ui/react-avatar",
+      "@radix-ui/react-aspect-ratio@1.1.2": "@radix-ui/react-aspect-ratio",
+      "@radix-ui/react-alert-dialog@1.1.6": "@radix-ui/react-alert-dialog",
+      "@radix-ui/react-accordion@1.2.3": "@radix-ui/react-accordion",
+      "@": path.resolve(__dirname, "./src")
+    }
+  },
+  build: {
+    target: "esnext"
+  }
+});
+export {
+  vite_config_default as default
+};

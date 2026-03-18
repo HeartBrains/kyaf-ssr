@@ -12,14 +12,6 @@ export default defineConfig({
   server: {
     preset: 'node-server',
   },
-  routers: {
-    client: {
-      entry: './app/client.tsx',
-    },
-    server: {
-      entry: './app/ssr.tsx',
-    },
-  },
   vite: {
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -117,7 +109,6 @@ export default defineConfig({
         '@radix-ui/react-alert-dialog@1.1.6': '@radix-ui/react-alert-dialog',
         '@radix-ui/react-accordion@1.2.3': '@radix-ui/react-accordion',
       '@': path.resolve(__dirname, './src'),
-        '@': path.resolve(__dirname, './src'),
       },
     },
     build: {
