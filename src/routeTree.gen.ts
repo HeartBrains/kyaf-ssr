@@ -15,7 +15,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as KyafIndexImport } from './routes/kyaf/index'
-import { Route as BkkkIndexImport } from './routes/bkkk/index'
+import { Route as BkkkIndexImport } from './routes/bk/index'
 import { Route as KyafVisitImport } from './routes/kyaf/visit'
 import { Route as KyafTeamImport } from './routes/kyaf/team'
 import { Route as KyafSupportImport } from './routes/kyaf/support'
@@ -27,44 +27,44 @@ import { Route as KyafHiddenAssetsImport } from './routes/kyaf/hidden-assets'
 import { Route as KyafContactImport } from './routes/kyaf/contact'
 import { Route as KyafArchivesImport } from './routes/kyaf/archives'
 import { Route as KyaflayoutImport } from './routes/kyaf/__layout'
-import { Route as BkkkVisitImport } from './routes/bkkk/visit'
-import { Route as BkkkTeamImport } from './routes/bkkk/team'
-import { Route as BkkkSupportImport } from './routes/bkkk/support'
-import { Route as BkkkShopImport } from './routes/bkkk/shop'
-import { Route as BkkkResidencyImport } from './routes/bkkk/residency'
-import { Route as BkkkPressImport } from './routes/bkkk/press'
-import { Route as BkkkNewsImport } from './routes/bkkk/news'
-import { Route as BkkkHiddenAssetsImport } from './routes/bkkk/hidden-assets'
-import { Route as BkkkContactImport } from './routes/bkkk/contact'
-import { Route as BkkkArchivesImport } from './routes/bkkk/archives'
-import { Route as BkkklayoutImport } from './routes/bkkk/__layout'
+import { Route as BkkkVisitImport } from './routes/bk/visit'
+import { Route as BkkkTeamImport } from './routes/bk/team'
+import { Route as BkkkSupportImport } from './routes/bk/support'
+import { Route as BkkkShopImport } from './routes/bk/shop'
+import { Route as BkkkResidencyImport } from './routes/bk/residency'
+import { Route as BkkkPressImport } from './routes/bk/press'
+import { Route as BkkkNewsImport } from './routes/bk/news'
+import { Route as BkkkHiddenAssetsImport } from './routes/bk/hidden-assets'
+import { Route as BkkkContactImport } from './routes/bk/contact'
+import { Route as BkkkArchivesImport } from './routes/bk/archives'
+import { Route as BkkklayoutImport } from './routes/bk/__layout'
 import { Route as KyafExhibitionsIndexImport } from './routes/kyaf/exhibitions/index'
 import { Route as KyafBlogIndexImport } from './routes/kyaf/blog/index'
 import { Route as KyafActivitiesIndexImport } from './routes/kyaf/activities/index'
 import { Route as KyafAboutIndexImport } from './routes/kyaf/about/index'
-import { Route as BkkkMovingImageIndexImport } from './routes/bkkk/moving-image/index'
-import { Route as BkkkExhibitionsIndexImport } from './routes/bkkk/exhibitions/index'
-import { Route as BkkkBlogIndexImport } from './routes/bkkk/blog/index'
-import { Route as BkkkActivitiesIndexImport } from './routes/bkkk/activities/index'
-import { Route as BkkkAboutIndexImport } from './routes/bkkk/about/index'
+import { Route as BkkkMovingImageIndexImport } from './routes/bk/moving-image/index'
+import { Route as BkkkExhibitionsIndexImport } from './routes/bk/exhibitions/index'
+import { Route as BkkkBlogIndexImport } from './routes/bk/blog/index'
+import { Route as BkkkActivitiesIndexImport } from './routes/bk/activities/index'
+import { Route as BkkkAboutIndexImport } from './routes/bk/about/index'
 import { Route as KyafExhibitionsSlugImport } from './routes/kyaf/exhibitions/$slug'
 import { Route as KyafBlogSlugImport } from './routes/kyaf/blog/$slug'
 import { Route as KyafArtistsSlugImport } from './routes/kyaf/artists/$slug'
 import { Route as KyafActivitiesSlugImport } from './routes/kyaf/activities/$slug'
 import { Route as KyafAboutVisionImport } from './routes/kyaf/about/vision'
 import { Route as KyafAboutHistoryImport } from './routes/kyaf/about/history'
-import { Route as BkkkMovingImageSlugImport } from './routes/bkkk/moving-image/$slug'
-import { Route as BkkkExhibitionsSlugImport } from './routes/bkkk/exhibitions/$slug'
-import { Route as BkkkBlogSlugImport } from './routes/bkkk/blog/$slug'
-import { Route as BkkkArtistsSlugImport } from './routes/bkkk/artists/$slug'
-import { Route as BkkkActivitiesSlugImport } from './routes/bkkk/activities/$slug'
-import { Route as BkkkAboutVisionImport } from './routes/bkkk/about/vision'
-import { Route as BkkkAboutHistoryImport } from './routes/bkkk/about/history'
+import { Route as BkkkMovingImageSlugImport } from './routes/bk/moving-image/$slug'
+import { Route as BkkkExhibitionsSlugImport } from './routes/bk/exhibitions/$slug'
+import { Route as BkkkBlogSlugImport } from './routes/bk/blog/$slug'
+import { Route as BkkkArtistsSlugImport } from './routes/bk/artists/$slug'
+import { Route as BkkkActivitiesSlugImport } from './routes/bk/activities/$slug'
+import { Route as BkkkAboutVisionImport } from './routes/bk/about/vision'
+import { Route as BkkkAboutHistoryImport } from './routes/bk/about/history'
 
 // Create Virtual Routes
 
 const KyafImport = createFileRoute('/kyaf')()
-const BkkkImport = createFileRoute('/bkkk')()
+const BkkkImport = createFileRoute('/bk')()
 
 // Create/Update Routes
 
@@ -75,8 +75,8 @@ const KyafRoute = KyafImport.update({
 } as any)
 
 const BkkkRoute = BkkkImport.update({
-  id: '/bkkk',
-  path: '/bkkk',
+  id: '/bk',
+  path: '/bk',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -371,87 +371,87 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/bkkk': {
-      id: '/bkkk'
-      path: '/bkkk'
-      fullPath: '/bkkk'
+    '/bk': {
+      id: '/bk'
+      path: '/bk'
+      fullPath: '/bk'
       preLoaderRoute: typeof BkkkImport
       parentRoute: typeof rootRoute
     }
-    '/bkkk/__layout': {
-      id: '/bkkk/__layout'
-      path: '/bkkk'
-      fullPath: '/bkkk'
+    '/bk/__layout': {
+      id: '/bk/__layout'
+      path: '/bk'
+      fullPath: '/bk'
       preLoaderRoute: typeof BkkklayoutImport
       parentRoute: typeof BkkkRoute
     }
-    '/bkkk/archives': {
-      id: '/bkkk/archives'
+    '/bk/archives': {
+      id: '/bk/archives'
       path: '/archives'
-      fullPath: '/bkkk/archives'
+      fullPath: '/bk/archives'
       preLoaderRoute: typeof BkkkArchivesImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/contact': {
-      id: '/bkkk/contact'
+    '/bk/contact': {
+      id: '/bk/contact'
       path: '/contact'
-      fullPath: '/bkkk/contact'
+      fullPath: '/bk/contact'
       preLoaderRoute: typeof BkkkContactImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/hidden-assets': {
-      id: '/bkkk/hidden-assets'
+    '/bk/hidden-assets': {
+      id: '/bk/hidden-assets'
       path: '/hidden-assets'
-      fullPath: '/bkkk/hidden-assets'
+      fullPath: '/bk/hidden-assets'
       preLoaderRoute: typeof BkkkHiddenAssetsImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/news': {
-      id: '/bkkk/news'
+    '/bk/news': {
+      id: '/bk/news'
       path: '/news'
-      fullPath: '/bkkk/news'
+      fullPath: '/bk/news'
       preLoaderRoute: typeof BkkkNewsImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/press': {
-      id: '/bkkk/press'
+    '/bk/press': {
+      id: '/bk/press'
       path: '/press'
-      fullPath: '/bkkk/press'
+      fullPath: '/bk/press'
       preLoaderRoute: typeof BkkkPressImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/residency': {
-      id: '/bkkk/residency'
+    '/bk/residency': {
+      id: '/bk/residency'
       path: '/residency'
-      fullPath: '/bkkk/residency'
+      fullPath: '/bk/residency'
       preLoaderRoute: typeof BkkkResidencyImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/shop': {
-      id: '/bkkk/shop'
+    '/bk/shop': {
+      id: '/bk/shop'
       path: '/shop'
-      fullPath: '/bkkk/shop'
+      fullPath: '/bk/shop'
       preLoaderRoute: typeof BkkkShopImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/support': {
-      id: '/bkkk/support'
+    '/bk/support': {
+      id: '/bk/support'
       path: '/support'
-      fullPath: '/bkkk/support'
+      fullPath: '/bk/support'
       preLoaderRoute: typeof BkkkSupportImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/team': {
-      id: '/bkkk/team'
+    '/bk/team': {
+      id: '/bk/team'
       path: '/team'
-      fullPath: '/bkkk/team'
+      fullPath: '/bk/team'
       preLoaderRoute: typeof BkkkTeamImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/visit': {
-      id: '/bkkk/visit'
+    '/bk/visit': {
+      id: '/bk/visit'
       path: '/visit'
-      fullPath: '/bkkk/visit'
+      fullPath: '/bk/visit'
       preLoaderRoute: typeof BkkkVisitImport
       parentRoute: typeof BkkkImport
     }
@@ -539,10 +539,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KyafVisitImport
       parentRoute: typeof KyafImport
     }
-    '/bkkk/': {
-      id: '/bkkk/'
+    '/bk/': {
+      id: '/bk/'
       path: '/'
-      fullPath: '/bkkk/'
+      fullPath: '/bk/'
       preLoaderRoute: typeof BkkkIndexImport
       parentRoute: typeof BkkkImport
     }
@@ -553,52 +553,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KyafIndexImport
       parentRoute: typeof KyafImport
     }
-    '/bkkk/about/history': {
-      id: '/bkkk/about/history'
+    '/bk/about/history': {
+      id: '/bk/about/history'
       path: '/about/history'
-      fullPath: '/bkkk/about/history'
+      fullPath: '/bk/about/history'
       preLoaderRoute: typeof BkkkAboutHistoryImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/about/vision': {
-      id: '/bkkk/about/vision'
+    '/bk/about/vision': {
+      id: '/bk/about/vision'
       path: '/about/vision'
-      fullPath: '/bkkk/about/vision'
+      fullPath: '/bk/about/vision'
       preLoaderRoute: typeof BkkkAboutVisionImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/activities/$slug': {
-      id: '/bkkk/activities/$slug'
+    '/bk/activities/$slug': {
+      id: '/bk/activities/$slug'
       path: '/activities/$slug'
-      fullPath: '/bkkk/activities/$slug'
+      fullPath: '/bk/activities/$slug'
       preLoaderRoute: typeof BkkkActivitiesSlugImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/artists/$slug': {
-      id: '/bkkk/artists/$slug'
+    '/bk/artists/$slug': {
+      id: '/bk/artists/$slug'
       path: '/artists/$slug'
-      fullPath: '/bkkk/artists/$slug'
+      fullPath: '/bk/artists/$slug'
       preLoaderRoute: typeof BkkkArtistsSlugImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/blog/$slug': {
-      id: '/bkkk/blog/$slug'
+    '/bk/blog/$slug': {
+      id: '/bk/blog/$slug'
       path: '/blog/$slug'
-      fullPath: '/bkkk/blog/$slug'
+      fullPath: '/bk/blog/$slug'
       preLoaderRoute: typeof BkkkBlogSlugImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/exhibitions/$slug': {
-      id: '/bkkk/exhibitions/$slug'
+    '/bk/exhibitions/$slug': {
+      id: '/bk/exhibitions/$slug'
       path: '/exhibitions/$slug'
-      fullPath: '/bkkk/exhibitions/$slug'
+      fullPath: '/bk/exhibitions/$slug'
       preLoaderRoute: typeof BkkkExhibitionsSlugImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/moving-image/$slug': {
-      id: '/bkkk/moving-image/$slug'
+    '/bk/moving-image/$slug': {
+      id: '/bk/moving-image/$slug'
       path: '/moving-image/$slug'
-      fullPath: '/bkkk/moving-image/$slug'
+      fullPath: '/bk/moving-image/$slug'
       preLoaderRoute: typeof BkkkMovingImageSlugImport
       parentRoute: typeof BkkkImport
     }
@@ -644,38 +644,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KyafExhibitionsSlugImport
       parentRoute: typeof KyafImport
     }
-    '/bkkk/about/': {
-      id: '/bkkk/about/'
+    '/bk/about/': {
+      id: '/bk/about/'
       path: '/about'
-      fullPath: '/bkkk/about'
+      fullPath: '/bk/about'
       preLoaderRoute: typeof BkkkAboutIndexImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/activities/': {
-      id: '/bkkk/activities/'
+    '/bk/activities/': {
+      id: '/bk/activities/'
       path: '/activities'
-      fullPath: '/bkkk/activities'
+      fullPath: '/bk/activities'
       preLoaderRoute: typeof BkkkActivitiesIndexImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/blog/': {
-      id: '/bkkk/blog/'
+    '/bk/blog/': {
+      id: '/bk/blog/'
       path: '/blog'
-      fullPath: '/bkkk/blog'
+      fullPath: '/bk/blog'
       preLoaderRoute: typeof BkkkBlogIndexImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/exhibitions/': {
-      id: '/bkkk/exhibitions/'
+    '/bk/exhibitions/': {
+      id: '/bk/exhibitions/'
       path: '/exhibitions'
-      fullPath: '/bkkk/exhibitions'
+      fullPath: '/bk/exhibitions'
       preLoaderRoute: typeof BkkkExhibitionsIndexImport
       parentRoute: typeof BkkkImport
     }
-    '/bkkk/moving-image/': {
-      id: '/bkkk/moving-image/'
+    '/bk/moving-image/': {
+      id: '/bk/moving-image/'
       path: '/moving-image'
-      fullPath: '/bkkk/moving-image'
+      fullPath: '/bk/moving-image'
       preLoaderRoute: typeof BkkkMovingImageIndexImport
       parentRoute: typeof BkkkImport
     }
@@ -822,17 +822,17 @@ const KyafRouteWithChildren = KyafRoute._addFileChildren(KyafRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/bkkk': typeof BkkklayoutRoute
-  '/bkkk/archives': typeof BkkkArchivesRoute
-  '/bkkk/contact': typeof BkkkContactRoute
-  '/bkkk/hidden-assets': typeof BkkkHiddenAssetsRoute
-  '/bkkk/news': typeof BkkkNewsRoute
-  '/bkkk/press': typeof BkkkPressRoute
-  '/bkkk/residency': typeof BkkkResidencyRoute
-  '/bkkk/shop': typeof BkkkShopRoute
-  '/bkkk/support': typeof BkkkSupportRoute
-  '/bkkk/team': typeof BkkkTeamRoute
-  '/bkkk/visit': typeof BkkkVisitRoute
+  '/bk': typeof BkkklayoutRoute
+  '/bk/archives': typeof BkkkArchivesRoute
+  '/bk/contact': typeof BkkkContactRoute
+  '/bk/hidden-assets': typeof BkkkHiddenAssetsRoute
+  '/bk/news': typeof BkkkNewsRoute
+  '/bk/press': typeof BkkkPressRoute
+  '/bk/residency': typeof BkkkResidencyRoute
+  '/bk/shop': typeof BkkkShopRoute
+  '/bk/support': typeof BkkkSupportRoute
+  '/bk/team': typeof BkkkTeamRoute
+  '/bk/visit': typeof BkkkVisitRoute
   '/kyaf': typeof KyaflayoutRoute
   '/kyaf/archives': typeof KyafArchivesRoute
   '/kyaf/contact': typeof KyafContactRoute
@@ -844,26 +844,26 @@ export interface FileRoutesByFullPath {
   '/kyaf/support': typeof KyafSupportRoute
   '/kyaf/team': typeof KyafTeamRoute
   '/kyaf/visit': typeof KyafVisitRoute
-  '/bkkk/': typeof BkkkIndexRoute
+  '/bk/': typeof BkkkIndexRoute
   '/kyaf/': typeof KyafIndexRoute
-  '/bkkk/about/history': typeof BkkkAboutHistoryRoute
-  '/bkkk/about/vision': typeof BkkkAboutVisionRoute
-  '/bkkk/activities/$slug': typeof BkkkActivitiesSlugRoute
-  '/bkkk/artists/$slug': typeof BkkkArtistsSlugRoute
-  '/bkkk/blog/$slug': typeof BkkkBlogSlugRoute
-  '/bkkk/exhibitions/$slug': typeof BkkkExhibitionsSlugRoute
-  '/bkkk/moving-image/$slug': typeof BkkkMovingImageSlugRoute
+  '/bk/about/history': typeof BkkkAboutHistoryRoute
+  '/bk/about/vision': typeof BkkkAboutVisionRoute
+  '/bk/activities/$slug': typeof BkkkActivitiesSlugRoute
+  '/bk/artists/$slug': typeof BkkkArtistsSlugRoute
+  '/bk/blog/$slug': typeof BkkkBlogSlugRoute
+  '/bk/exhibitions/$slug': typeof BkkkExhibitionsSlugRoute
+  '/bk/moving-image/$slug': typeof BkkkMovingImageSlugRoute
   '/kyaf/about/history': typeof KyafAboutHistoryRoute
   '/kyaf/about/vision': typeof KyafAboutVisionRoute
   '/kyaf/activities/$slug': typeof KyafActivitiesSlugRoute
   '/kyaf/artists/$slug': typeof KyafArtistsSlugRoute
   '/kyaf/blog/$slug': typeof KyafBlogSlugRoute
   '/kyaf/exhibitions/$slug': typeof KyafExhibitionsSlugRoute
-  '/bkkk/about': typeof BkkkAboutIndexRoute
-  '/bkkk/activities': typeof BkkkActivitiesIndexRoute
-  '/bkkk/blog': typeof BkkkBlogIndexRoute
-  '/bkkk/exhibitions': typeof BkkkExhibitionsIndexRoute
-  '/bkkk/moving-image': typeof BkkkMovingImageIndexRoute
+  '/bk/about': typeof BkkkAboutIndexRoute
+  '/bk/activities': typeof BkkkActivitiesIndexRoute
+  '/bk/blog': typeof BkkkBlogIndexRoute
+  '/bk/exhibitions': typeof BkkkExhibitionsIndexRoute
+  '/bk/moving-image': typeof BkkkMovingImageIndexRoute
   '/kyaf/about': typeof KyafAboutIndexRoute
   '/kyaf/activities': typeof KyafActivitiesIndexRoute
   '/kyaf/blog': typeof KyafBlogIndexRoute
@@ -872,17 +872,17 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/bkkk': typeof BkkkIndexRoute
-  '/bkkk/archives': typeof BkkkArchivesRoute
-  '/bkkk/contact': typeof BkkkContactRoute
-  '/bkkk/hidden-assets': typeof BkkkHiddenAssetsRoute
-  '/bkkk/news': typeof BkkkNewsRoute
-  '/bkkk/press': typeof BkkkPressRoute
-  '/bkkk/residency': typeof BkkkResidencyRoute
-  '/bkkk/shop': typeof BkkkShopRoute
-  '/bkkk/support': typeof BkkkSupportRoute
-  '/bkkk/team': typeof BkkkTeamRoute
-  '/bkkk/visit': typeof BkkkVisitRoute
+  '/bk': typeof BkkkIndexRoute
+  '/bk/archives': typeof BkkkArchivesRoute
+  '/bk/contact': typeof BkkkContactRoute
+  '/bk/hidden-assets': typeof BkkkHiddenAssetsRoute
+  '/bk/news': typeof BkkkNewsRoute
+  '/bk/press': typeof BkkkPressRoute
+  '/bk/residency': typeof BkkkResidencyRoute
+  '/bk/shop': typeof BkkkShopRoute
+  '/bk/support': typeof BkkkSupportRoute
+  '/bk/team': typeof BkkkTeamRoute
+  '/bk/visit': typeof BkkkVisitRoute
   '/kyaf': typeof KyafIndexRoute
   '/kyaf/archives': typeof KyafArchivesRoute
   '/kyaf/contact': typeof KyafContactRoute
@@ -894,24 +894,24 @@ export interface FileRoutesByTo {
   '/kyaf/support': typeof KyafSupportRoute
   '/kyaf/team': typeof KyafTeamRoute
   '/kyaf/visit': typeof KyafVisitRoute
-  '/bkkk/about/history': typeof BkkkAboutHistoryRoute
-  '/bkkk/about/vision': typeof BkkkAboutVisionRoute
-  '/bkkk/activities/$slug': typeof BkkkActivitiesSlugRoute
-  '/bkkk/artists/$slug': typeof BkkkArtistsSlugRoute
-  '/bkkk/blog/$slug': typeof BkkkBlogSlugRoute
-  '/bkkk/exhibitions/$slug': typeof BkkkExhibitionsSlugRoute
-  '/bkkk/moving-image/$slug': typeof BkkkMovingImageSlugRoute
+  '/bk/about/history': typeof BkkkAboutHistoryRoute
+  '/bk/about/vision': typeof BkkkAboutVisionRoute
+  '/bk/activities/$slug': typeof BkkkActivitiesSlugRoute
+  '/bk/artists/$slug': typeof BkkkArtistsSlugRoute
+  '/bk/blog/$slug': typeof BkkkBlogSlugRoute
+  '/bk/exhibitions/$slug': typeof BkkkExhibitionsSlugRoute
+  '/bk/moving-image/$slug': typeof BkkkMovingImageSlugRoute
   '/kyaf/about/history': typeof KyafAboutHistoryRoute
   '/kyaf/about/vision': typeof KyafAboutVisionRoute
   '/kyaf/activities/$slug': typeof KyafActivitiesSlugRoute
   '/kyaf/artists/$slug': typeof KyafArtistsSlugRoute
   '/kyaf/blog/$slug': typeof KyafBlogSlugRoute
   '/kyaf/exhibitions/$slug': typeof KyafExhibitionsSlugRoute
-  '/bkkk/about': typeof BkkkAboutIndexRoute
-  '/bkkk/activities': typeof BkkkActivitiesIndexRoute
-  '/bkkk/blog': typeof BkkkBlogIndexRoute
-  '/bkkk/exhibitions': typeof BkkkExhibitionsIndexRoute
-  '/bkkk/moving-image': typeof BkkkMovingImageIndexRoute
+  '/bk/about': typeof BkkkAboutIndexRoute
+  '/bk/activities': typeof BkkkActivitiesIndexRoute
+  '/bk/blog': typeof BkkkBlogIndexRoute
+  '/bk/exhibitions': typeof BkkkExhibitionsIndexRoute
+  '/bk/moving-image': typeof BkkkMovingImageIndexRoute
   '/kyaf/about': typeof KyafAboutIndexRoute
   '/kyaf/activities': typeof KyafActivitiesIndexRoute
   '/kyaf/blog': typeof KyafBlogIndexRoute
@@ -921,18 +921,18 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/bkkk': typeof BkkkRouteWithChildren
-  '/bkkk/__layout': typeof BkkklayoutRoute
-  '/bkkk/archives': typeof BkkkArchivesRoute
-  '/bkkk/contact': typeof BkkkContactRoute
-  '/bkkk/hidden-assets': typeof BkkkHiddenAssetsRoute
-  '/bkkk/news': typeof BkkkNewsRoute
-  '/bkkk/press': typeof BkkkPressRoute
-  '/bkkk/residency': typeof BkkkResidencyRoute
-  '/bkkk/shop': typeof BkkkShopRoute
-  '/bkkk/support': typeof BkkkSupportRoute
-  '/bkkk/team': typeof BkkkTeamRoute
-  '/bkkk/visit': typeof BkkkVisitRoute
+  '/bk': typeof BkkkRouteWithChildren
+  '/bk/__layout': typeof BkkklayoutRoute
+  '/bk/archives': typeof BkkkArchivesRoute
+  '/bk/contact': typeof BkkkContactRoute
+  '/bk/hidden-assets': typeof BkkkHiddenAssetsRoute
+  '/bk/news': typeof BkkkNewsRoute
+  '/bk/press': typeof BkkkPressRoute
+  '/bk/residency': typeof BkkkResidencyRoute
+  '/bk/shop': typeof BkkkShopRoute
+  '/bk/support': typeof BkkkSupportRoute
+  '/bk/team': typeof BkkkTeamRoute
+  '/bk/visit': typeof BkkkVisitRoute
   '/kyaf': typeof KyafRouteWithChildren
   '/kyaf/__layout': typeof KyaflayoutRoute
   '/kyaf/archives': typeof KyafArchivesRoute
@@ -945,26 +945,26 @@ export interface FileRoutesById {
   '/kyaf/support': typeof KyafSupportRoute
   '/kyaf/team': typeof KyafTeamRoute
   '/kyaf/visit': typeof KyafVisitRoute
-  '/bkkk/': typeof BkkkIndexRoute
+  '/bk/': typeof BkkkIndexRoute
   '/kyaf/': typeof KyafIndexRoute
-  '/bkkk/about/history': typeof BkkkAboutHistoryRoute
-  '/bkkk/about/vision': typeof BkkkAboutVisionRoute
-  '/bkkk/activities/$slug': typeof BkkkActivitiesSlugRoute
-  '/bkkk/artists/$slug': typeof BkkkArtistsSlugRoute
-  '/bkkk/blog/$slug': typeof BkkkBlogSlugRoute
-  '/bkkk/exhibitions/$slug': typeof BkkkExhibitionsSlugRoute
-  '/bkkk/moving-image/$slug': typeof BkkkMovingImageSlugRoute
+  '/bk/about/history': typeof BkkkAboutHistoryRoute
+  '/bk/about/vision': typeof BkkkAboutVisionRoute
+  '/bk/activities/$slug': typeof BkkkActivitiesSlugRoute
+  '/bk/artists/$slug': typeof BkkkArtistsSlugRoute
+  '/bk/blog/$slug': typeof BkkkBlogSlugRoute
+  '/bk/exhibitions/$slug': typeof BkkkExhibitionsSlugRoute
+  '/bk/moving-image/$slug': typeof BkkkMovingImageSlugRoute
   '/kyaf/about/history': typeof KyafAboutHistoryRoute
   '/kyaf/about/vision': typeof KyafAboutVisionRoute
   '/kyaf/activities/$slug': typeof KyafActivitiesSlugRoute
   '/kyaf/artists/$slug': typeof KyafArtistsSlugRoute
   '/kyaf/blog/$slug': typeof KyafBlogSlugRoute
   '/kyaf/exhibitions/$slug': typeof KyafExhibitionsSlugRoute
-  '/bkkk/about/': typeof BkkkAboutIndexRoute
-  '/bkkk/activities/': typeof BkkkActivitiesIndexRoute
-  '/bkkk/blog/': typeof BkkkBlogIndexRoute
-  '/bkkk/exhibitions/': typeof BkkkExhibitionsIndexRoute
-  '/bkkk/moving-image/': typeof BkkkMovingImageIndexRoute
+  '/bk/about/': typeof BkkkAboutIndexRoute
+  '/bk/activities/': typeof BkkkActivitiesIndexRoute
+  '/bk/blog/': typeof BkkkBlogIndexRoute
+  '/bk/exhibitions/': typeof BkkkExhibitionsIndexRoute
+  '/bk/moving-image/': typeof BkkkMovingImageIndexRoute
   '/kyaf/about/': typeof KyafAboutIndexRoute
   '/kyaf/activities/': typeof KyafActivitiesIndexRoute
   '/kyaf/blog/': typeof KyafBlogIndexRoute
@@ -975,17 +975,17 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/bkkk'
-    | '/bkkk/archives'
-    | '/bkkk/contact'
-    | '/bkkk/hidden-assets'
-    | '/bkkk/news'
-    | '/bkkk/press'
-    | '/bkkk/residency'
-    | '/bkkk/shop'
-    | '/bkkk/support'
-    | '/bkkk/team'
-    | '/bkkk/visit'
+    | '/bk'
+    | '/bk/archives'
+    | '/bk/contact'
+    | '/bk/hidden-assets'
+    | '/bk/news'
+    | '/bk/press'
+    | '/bk/residency'
+    | '/bk/shop'
+    | '/bk/support'
+    | '/bk/team'
+    | '/bk/visit'
     | '/kyaf'
     | '/kyaf/archives'
     | '/kyaf/contact'
@@ -997,26 +997,26 @@ export interface FileRouteTypes {
     | '/kyaf/support'
     | '/kyaf/team'
     | '/kyaf/visit'
-    | '/bkkk/'
+    | '/bk/'
     | '/kyaf/'
-    | '/bkkk/about/history'
-    | '/bkkk/about/vision'
-    | '/bkkk/activities/$slug'
-    | '/bkkk/artists/$slug'
-    | '/bkkk/blog/$slug'
-    | '/bkkk/exhibitions/$slug'
-    | '/bkkk/moving-image/$slug'
+    | '/bk/about/history'
+    | '/bk/about/vision'
+    | '/bk/activities/$slug'
+    | '/bk/artists/$slug'
+    | '/bk/blog/$slug'
+    | '/bk/exhibitions/$slug'
+    | '/bk/moving-image/$slug'
     | '/kyaf/about/history'
     | '/kyaf/about/vision'
     | '/kyaf/activities/$slug'
     | '/kyaf/artists/$slug'
     | '/kyaf/blog/$slug'
     | '/kyaf/exhibitions/$slug'
-    | '/bkkk/about'
-    | '/bkkk/activities'
-    | '/bkkk/blog'
-    | '/bkkk/exhibitions'
-    | '/bkkk/moving-image'
+    | '/bk/about'
+    | '/bk/activities'
+    | '/bk/blog'
+    | '/bk/exhibitions'
+    | '/bk/moving-image'
     | '/kyaf/about'
     | '/kyaf/activities'
     | '/kyaf/blog'
@@ -1024,17 +1024,17 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/bkkk'
-    | '/bkkk/archives'
-    | '/bkkk/contact'
-    | '/bkkk/hidden-assets'
-    | '/bkkk/news'
-    | '/bkkk/press'
-    | '/bkkk/residency'
-    | '/bkkk/shop'
-    | '/bkkk/support'
-    | '/bkkk/team'
-    | '/bkkk/visit'
+    | '/bk'
+    | '/bk/archives'
+    | '/bk/contact'
+    | '/bk/hidden-assets'
+    | '/bk/news'
+    | '/bk/press'
+    | '/bk/residency'
+    | '/bk/shop'
+    | '/bk/support'
+    | '/bk/team'
+    | '/bk/visit'
     | '/kyaf'
     | '/kyaf/archives'
     | '/kyaf/contact'
@@ -1046,24 +1046,24 @@ export interface FileRouteTypes {
     | '/kyaf/support'
     | '/kyaf/team'
     | '/kyaf/visit'
-    | '/bkkk/about/history'
-    | '/bkkk/about/vision'
-    | '/bkkk/activities/$slug'
-    | '/bkkk/artists/$slug'
-    | '/bkkk/blog/$slug'
-    | '/bkkk/exhibitions/$slug'
-    | '/bkkk/moving-image/$slug'
+    | '/bk/about/history'
+    | '/bk/about/vision'
+    | '/bk/activities/$slug'
+    | '/bk/artists/$slug'
+    | '/bk/blog/$slug'
+    | '/bk/exhibitions/$slug'
+    | '/bk/moving-image/$slug'
     | '/kyaf/about/history'
     | '/kyaf/about/vision'
     | '/kyaf/activities/$slug'
     | '/kyaf/artists/$slug'
     | '/kyaf/blog/$slug'
     | '/kyaf/exhibitions/$slug'
-    | '/bkkk/about'
-    | '/bkkk/activities'
-    | '/bkkk/blog'
-    | '/bkkk/exhibitions'
-    | '/bkkk/moving-image'
+    | '/bk/about'
+    | '/bk/activities'
+    | '/bk/blog'
+    | '/bk/exhibitions'
+    | '/bk/moving-image'
     | '/kyaf/about'
     | '/kyaf/activities'
     | '/kyaf/blog'
@@ -1071,18 +1071,18 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/bkkk'
-    | '/bkkk/__layout'
-    | '/bkkk/archives'
-    | '/bkkk/contact'
-    | '/bkkk/hidden-assets'
-    | '/bkkk/news'
-    | '/bkkk/press'
-    | '/bkkk/residency'
-    | '/bkkk/shop'
-    | '/bkkk/support'
-    | '/bkkk/team'
-    | '/bkkk/visit'
+    | '/bk'
+    | '/bk/__layout'
+    | '/bk/archives'
+    | '/bk/contact'
+    | '/bk/hidden-assets'
+    | '/bk/news'
+    | '/bk/press'
+    | '/bk/residency'
+    | '/bk/shop'
+    | '/bk/support'
+    | '/bk/team'
+    | '/bk/visit'
     | '/kyaf'
     | '/kyaf/__layout'
     | '/kyaf/archives'
@@ -1095,26 +1095,26 @@ export interface FileRouteTypes {
     | '/kyaf/support'
     | '/kyaf/team'
     | '/kyaf/visit'
-    | '/bkkk/'
+    | '/bk/'
     | '/kyaf/'
-    | '/bkkk/about/history'
-    | '/bkkk/about/vision'
-    | '/bkkk/activities/$slug'
-    | '/bkkk/artists/$slug'
-    | '/bkkk/blog/$slug'
-    | '/bkkk/exhibitions/$slug'
-    | '/bkkk/moving-image/$slug'
+    | '/bk/about/history'
+    | '/bk/about/vision'
+    | '/bk/activities/$slug'
+    | '/bk/artists/$slug'
+    | '/bk/blog/$slug'
+    | '/bk/exhibitions/$slug'
+    | '/bk/moving-image/$slug'
     | '/kyaf/about/history'
     | '/kyaf/about/vision'
     | '/kyaf/activities/$slug'
     | '/kyaf/artists/$slug'
     | '/kyaf/blog/$slug'
     | '/kyaf/exhibitions/$slug'
-    | '/bkkk/about/'
-    | '/bkkk/activities/'
-    | '/bkkk/blog/'
-    | '/bkkk/exhibitions/'
-    | '/bkkk/moving-image/'
+    | '/bk/about/'
+    | '/bk/activities/'
+    | '/bk/blog/'
+    | '/bk/exhibitions/'
+    | '/bk/moving-image/'
     | '/kyaf/about/'
     | '/kyaf/activities/'
     | '/kyaf/blog/'
@@ -1145,85 +1145,85 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/bkkk",
+        "/bk",
         "/kyaf"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/bkkk": {
-      "filePath": "bkkk",
+    "/bk": {
+      "filePath": "bk",
       "children": [
-        "/bkkk/__layout",
-        "/bkkk/archives",
-        "/bkkk/contact",
-        "/bkkk/hidden-assets",
-        "/bkkk/news",
-        "/bkkk/press",
-        "/bkkk/residency",
-        "/bkkk/shop",
-        "/bkkk/support",
-        "/bkkk/team",
-        "/bkkk/visit",
-        "/bkkk/",
-        "/bkkk/about/history",
-        "/bkkk/about/vision",
-        "/bkkk/activities/$slug",
-        "/bkkk/artists/$slug",
-        "/bkkk/blog/$slug",
-        "/bkkk/exhibitions/$slug",
-        "/bkkk/moving-image/$slug",
-        "/bkkk/about/",
-        "/bkkk/activities/",
-        "/bkkk/blog/",
-        "/bkkk/exhibitions/",
-        "/bkkk/moving-image/"
+        "/bk/__layout",
+        "/bk/archives",
+        "/bk/contact",
+        "/bk/hidden-assets",
+        "/bk/news",
+        "/bk/press",
+        "/bk/residency",
+        "/bk/shop",
+        "/bk/support",
+        "/bk/team",
+        "/bk/visit",
+        "/bk/",
+        "/bk/about/history",
+        "/bk/about/vision",
+        "/bk/activities/$slug",
+        "/bk/artists/$slug",
+        "/bk/blog/$slug",
+        "/bk/exhibitions/$slug",
+        "/bk/moving-image/$slug",
+        "/bk/about/",
+        "/bk/activities/",
+        "/bk/blog/",
+        "/bk/exhibitions/",
+        "/bk/moving-image/"
       ]
     },
-    "/bkkk/__layout": {
-      "filePath": "bkkk/__layout.tsx",
-      "parent": "/bkkk"
+    "/bk/__layout": {
+      "filePath": "bk/__layout.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/archives": {
-      "filePath": "bkkk/archives.tsx",
-      "parent": "/bkkk"
+    "/bk/archives": {
+      "filePath": "bk/archives.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/contact": {
-      "filePath": "bkkk/contact.tsx",
-      "parent": "/bkkk"
+    "/bk/contact": {
+      "filePath": "bk/contact.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/hidden-assets": {
-      "filePath": "bkkk/hidden-assets.tsx",
-      "parent": "/bkkk"
+    "/bk/hidden-assets": {
+      "filePath": "bk/hidden-assets.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/news": {
-      "filePath": "bkkk/news.tsx",
-      "parent": "/bkkk"
+    "/bk/news": {
+      "filePath": "bk/news.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/press": {
-      "filePath": "bkkk/press.tsx",
-      "parent": "/bkkk"
+    "/bk/press": {
+      "filePath": "bk/press.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/residency": {
-      "filePath": "bkkk/residency.tsx",
-      "parent": "/bkkk"
+    "/bk/residency": {
+      "filePath": "bk/residency.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/shop": {
-      "filePath": "bkkk/shop.tsx",
-      "parent": "/bkkk"
+    "/bk/shop": {
+      "filePath": "bk/shop.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/support": {
-      "filePath": "bkkk/support.tsx",
-      "parent": "/bkkk"
+    "/bk/support": {
+      "filePath": "bk/support.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/team": {
-      "filePath": "bkkk/team.tsx",
-      "parent": "/bkkk"
+    "/bk/team": {
+      "filePath": "bk/team.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/visit": {
-      "filePath": "bkkk/visit.tsx",
-      "parent": "/bkkk"
+    "/bk/visit": {
+      "filePath": "bk/visit.tsx",
+      "parent": "/bk"
     },
     "/kyaf": {
       "filePath": "kyaf",
@@ -1296,41 +1296,41 @@ export const routeTree = rootRoute
       "filePath": "kyaf/visit.tsx",
       "parent": "/kyaf"
     },
-    "/bkkk/": {
-      "filePath": "bkkk/index.tsx",
-      "parent": "/bkkk"
+    "/bk/": {
+      "filePath": "bk/index.tsx",
+      "parent": "/bk"
     },
     "/kyaf/": {
       "filePath": "kyaf/index.tsx",
       "parent": "/kyaf"
     },
-    "/bkkk/about/history": {
-      "filePath": "bkkk/about/history.tsx",
-      "parent": "/bkkk"
+    "/bk/about/history": {
+      "filePath": "bk/about/history.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/about/vision": {
-      "filePath": "bkkk/about/vision.tsx",
-      "parent": "/bkkk"
+    "/bk/about/vision": {
+      "filePath": "bk/about/vision.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/activities/$slug": {
-      "filePath": "bkkk/activities/$slug.tsx",
-      "parent": "/bkkk"
+    "/bk/activities/$slug": {
+      "filePath": "bk/activities/$slug.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/artists/$slug": {
-      "filePath": "bkkk/artists/$slug.tsx",
-      "parent": "/bkkk"
+    "/bk/artists/$slug": {
+      "filePath": "bk/artists/$slug.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/blog/$slug": {
-      "filePath": "bkkk/blog/$slug.tsx",
-      "parent": "/bkkk"
+    "/bk/blog/$slug": {
+      "filePath": "bk/blog/$slug.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/exhibitions/$slug": {
-      "filePath": "bkkk/exhibitions/$slug.tsx",
-      "parent": "/bkkk"
+    "/bk/exhibitions/$slug": {
+      "filePath": "bk/exhibitions/$slug.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/moving-image/$slug": {
-      "filePath": "bkkk/moving-image/$slug.tsx",
-      "parent": "/bkkk"
+    "/bk/moving-image/$slug": {
+      "filePath": "bk/moving-image/$slug.tsx",
+      "parent": "/bk"
     },
     "/kyaf/about/history": {
       "filePath": "kyaf/about/history.tsx",
@@ -1356,25 +1356,25 @@ export const routeTree = rootRoute
       "filePath": "kyaf/exhibitions/$slug.tsx",
       "parent": "/kyaf"
     },
-    "/bkkk/about/": {
-      "filePath": "bkkk/about/index.tsx",
-      "parent": "/bkkk"
+    "/bk/about/": {
+      "filePath": "bk/about/index.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/activities/": {
-      "filePath": "bkkk/activities/index.tsx",
-      "parent": "/bkkk"
+    "/bk/activities/": {
+      "filePath": "bk/activities/index.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/blog/": {
-      "filePath": "bkkk/blog/index.tsx",
-      "parent": "/bkkk"
+    "/bk/blog/": {
+      "filePath": "bk/blog/index.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/exhibitions/": {
-      "filePath": "bkkk/exhibitions/index.tsx",
-      "parent": "/bkkk"
+    "/bk/exhibitions/": {
+      "filePath": "bk/exhibitions/index.tsx",
+      "parent": "/bk"
     },
-    "/bkkk/moving-image/": {
-      "filePath": "bkkk/moving-image/index.tsx",
-      "parent": "/bkkk"
+    "/bk/moving-image/": {
+      "filePath": "bk/moving-image/index.tsx",
+      "parent": "/bk"
     },
     "/kyaf/about/": {
       "filePath": "kyaf/about/index.tsx",

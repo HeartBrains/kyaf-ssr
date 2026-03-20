@@ -1,0 +1,7 @@
+services:
+  dev:
+    name: Vite Dev Server
+    description: Starts the Vite development server
+    commands:
+      start: npm run dev -- --port 5173 --host
+      ready: curl -s http://localhost:5173/ > /dev/null

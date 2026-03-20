@@ -11,7 +11,7 @@ function LandingRoute() {
   });
   return (
     <LandingPage
-      onEnterBkkk={() => navigate({ to: '/bkkk' })}
+      onEnterBkkk={() => navigate({ to: '/bk' })}
       onEnterKyaf={() => navigate({ to: '/kyaf' })}
     />
   );

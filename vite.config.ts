@@ -43,7 +43,7 @@ const BKKK_BASE_URL = (process.env.VITE_BKKK_BASE_URL ?? '').trim() || 'https://
 // server.allowedHosts must be defined at the top level (not inside async factory)
 // so Vite applies it before the host check fires.
 const serverConfig = {
-  allowedHosts: ['all'] as true | string[],
+  allowedHosts: true as const,
 };
 
 export default defineConfig(async () => {
