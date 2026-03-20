@@ -9,10 +9,10 @@ const MovingImagePage = lazy(() =>
 );
 
 function MovingImagePageRoute() {
-  useSEO(bkkkMeta('Moving Image', 'Moving image programs at Bangkok Kunsthalle.', { path: '/bkkk/moving-image' }));
+  useSEO(bkkkMeta('Moving Image', 'Moving image programs at Bangkok Kunsthalle.', { path: '/bk/moving-image' }));
   const navigate = useAppNavigate();
   const search = useSearch({ strict: false }) as { sectionId?: string };
   return <MovingImagePage onNavigate={navigate} targetSectionId={search.sectionId} />;
 }
 
-export const Route = createFileRoute('/bkkk/moving-image/')({ component: MovingImagePageRoute });
+export const Route = createFileRoute('/bk/moving-image/')({ component: MovingImagePageRoute });

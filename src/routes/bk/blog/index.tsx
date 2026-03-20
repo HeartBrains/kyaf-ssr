@@ -8,9 +8,9 @@ const BlogPage = lazy(() =>
 );
 
 function BlogPageRoute() {
-  useSEO(bkkkMeta('Blog', 'Articles and writing from Bangkok Kunsthalle.', { path: '/bkkk/blog' }));
+  useSEO(bkkkMeta('Blog', 'Articles and writing from Bangkok Kunsthalle.', { path: '/bk/blog' }));
   const navigate = useAppNavigate();
   return <BlogPage onNavigate={navigate} />;
 }
 
-export const Route = createFileRoute('/bkkk/blog/')({ component: BlogPageRoute });
+export const Route = createFileRoute('/bk/blog/')({ component: BlogPageRoute });

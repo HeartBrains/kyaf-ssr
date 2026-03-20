@@ -2,10 +2,10 @@ import { createFileRoute, useParams } from '@tanstack/react-router';
 import { lazy } from 'react';
 import { useAppNavigate } from '../../../bkkk/utils/useAppNavigate';
 import { useSEO, bkkkMeta } from '../../../lib/seo';
-import { useBkkkExhibitionBySlug } from '../../../lib/useWPData';
+import { useMovingImageBySlug } from '../../../lib/useWPData';
 
-const ExhibitionDetailPage = lazy(() =>
-  import('../../../bkkk/components/pages/ExhibitionDetailPage').then((m) => ({ default: m.ExhibitionDetailPage }))
+const MovingImageDetailPage = lazy(() =>
+  import('../../../bkkk/components/pages/MovingImageDetailPage').then((m) => ({ default: m.MovingImageDetailPage }))
 );
 
 // Loader: fetches from WordPress REST API if env var is set, falls back to mock data.
@@ -23,23 +23,22 @@ async function fetchSlugData(slug: string, type: string, apiBase: string | undef
   }
 }
 
-function ExhibitionDetailPageRoute() {
+function MovingImageDetailPageRoute() {
   const navigate = useAppNavigate();
   const { slug } = useParams({ strict: false }) as { slug: string };
-  const { data } = useBkkkExhibitionBySlug(slug);
-  useSEO(bkkkMeta(
-    data?.title.en ?? slug,
-    data?.content?.en?.replace(/<[^>]+>/g, '').slice(0, 160) ?? '',
-    { path: `/bkkk/exhibitions/${slug}`, image: data?.featuredImage, type: 'article' },
-  ));
-  return <ExhibitionDetailPage onNavigate={navigate} slug={slug || 'unwinding-architecture'} backPage={undefined} />;
+  const { data } = useMovingImageBySlug(slug);
+  const name = (data as any)?.title?.en ?? (data as any)?.name ?? slug;
+  const desc = (data as any)?.listingSummary?.en ?? (data as any)?.bio ?? '';
+  const img = (data as any)?.featuredImage ?? undefined;
+  useSEO(bkkkMeta(name, typeof desc === 'string' ? desc.replace(/<[^>]+>/g, '').slice(0, 160) : '', { path: `/bk/moving-image/${slug}`, image: img, type: 'article' }));
+  return <MovingImageDetailPage onNavigate={navigate} slug={slug || 'inviting-you-to-die-with-me'} backPage={undefined} />;
 }
 
-export const Route = createFileRoute('/bkkk/exhibitions/$slug')({
+export const Route = createFileRoute('/bk/moving-image/$slug')({
   loader: async ({ params }) => {
     const apiBase = import.meta.env.VITE_WP_BASE_URL;
-    const data = await fetchSlugData(params.slug, 'exhibition', apiBase);
+    const data = await fetchSlugData(params.slug, 'moving-image', apiBase);
     return { slug: params.slug, wpData: data };
   },
-  component: ExhibitionDetailPageRoute,
+  component: MovingImageDetailPageRoute,
 });

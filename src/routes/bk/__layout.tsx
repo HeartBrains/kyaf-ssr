@@ -56,6 +56,6 @@ function BkkkLayout() {
   );
 }
 
-export const Route = createFileRoute('/bkkk/__layout')({
+export const Route = createFileRoute('/bk/__layout')({
   component: BkkkLayout,
 });

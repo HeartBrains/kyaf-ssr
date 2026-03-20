@@ -8,9 +8,9 @@ const HomePage = lazy(() =>
 );
 
 function HomePageRoute() {
-  useSEO(bkkkMeta('Bangkok Kunsthalle', 'Contemporary art space in Bangkok, Thailand.', { path: '/bkkk' }));
+  useSEO(bkkkMeta('Bangkok Kunsthalle', 'Contemporary art space in Bangkok, Thailand.', { path: '/bk' }));
   const navigate = useAppNavigate();
   return <HomePage onNavigate={navigate} />;
 }
 
-export const Route = createFileRoute('/bkkk/')({ component: HomePageRoute });
+export const Route = createFileRoute('/bk/')({ component: HomePageRoute });

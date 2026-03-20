@@ -7,8 +7,8 @@ const ContactPage = lazy(() =>
 );
 
 function ContactPageRoute() {
-  useSEO(bkkkMeta('Contact', 'Contact Bangkok Kunsthalle.', { path: '/bkkk/contact' }));
+  useSEO(bkkkMeta('Contact', 'Contact Bangkok Kunsthalle.', { path: '/bk/contact' }));
   return <ContactPage  />;
 }
 
-export const Route = createFileRoute('/bkkk/contact')({ component: ContactPageRoute });
+export const Route = createFileRoute('/bk/contact')({ component: ContactPageRoute });

@@ -9,10 +9,10 @@ const ExhibitionsPage = lazy(() =>
 );
 
 function ExhibitionsPageRoute() {
-  useSEO(bkkkMeta('Exhibitions', 'Current and past exhibitions at Bangkok Kunsthalle.', { path: '/bkkk/exhibitions' }));
+  useSEO(bkkkMeta('Exhibitions', 'Current and past exhibitions at Bangkok Kunsthalle.', { path: '/bk/exhibitions' }));
   const navigate = useAppNavigate();
   const search = useSearch({ strict: false }) as { sectionId?: string };
   return <ExhibitionsPage onNavigate={navigate} targetSectionId={search.sectionId} />;
 }
 
-export const Route = createFileRoute('/bkkk/exhibitions/')({ component: ExhibitionsPageRoute });
+export const Route = createFileRoute('/bk/exhibitions/')({ component: ExhibitionsPageRoute });

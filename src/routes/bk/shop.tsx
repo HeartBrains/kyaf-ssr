@@ -9,10 +9,10 @@ const ShopPage = lazy(() =>
 );
 
 function ShopPageRoute() {
-  useSEO(bkkkMeta('Shop', 'Shop at Bangkok Kunsthalle.', { path: '/bkkk/shop' }));
+  useSEO(bkkkMeta('Shop', 'Shop at Bangkok Kunsthalle.', { path: '/bk/shop' }));
   const navigate = useAppNavigate();
   const search = useSearch({ strict: false }) as { sectionId?: string };
   return <ShopPage onNavigate={navigate} targetSectionId={search.sectionId} />;
 }
 
-export const Route = createFileRoute('/bkkk/shop')({ component: ShopPageRoute });
+export const Route = createFileRoute('/bk/shop')({ component: ShopPageRoute });

@@ -9,10 +9,10 @@ const ActivitiesPage = lazy(() =>
 );
 
 function ActivitiesPageRoute() {
-  useSEO(bkkkMeta('Activities', 'Events and activities at Bangkok Kunsthalle.', { path: '/bkkk/activities' }));
+  useSEO(bkkkMeta('Activities', 'Events and activities at Bangkok Kunsthalle.', { path: '/bk/activities' }));
   const navigate = useAppNavigate();
   const search = useSearch({ strict: false }) as { sectionId?: string };
   return <ActivitiesPage onNavigate={navigate} targetSectionId={search.sectionId} />;
 }
 
-export const Route = createFileRoute('/bkkk/activities/')({ component: ActivitiesPageRoute });
+export const Route = createFileRoute('/bk/activities/')({ component: ActivitiesPageRoute });

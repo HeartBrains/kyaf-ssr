@@ -11,4 +11,4 @@ function PostPageRoute() {
   return <PostPage onNavigate={navigate} />;
 }
 
-export const Route = createFileRoute('/bkkk/news')({ component: PostPageRoute });
+export const Route = createFileRoute('/bk/news')({ component: PostPageRoute });

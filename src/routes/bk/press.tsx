@@ -7,8 +7,8 @@ const PressPage = lazy(() =>
 );
 
 function PressPageRoute() {
-  useSEO(bkkkMeta('Press', 'Press and media resources for Bangkok Kunsthalle.', { path: '/bkkk/press' }));
+  useSEO(bkkkMeta('Press', 'Press and media resources for Bangkok Kunsthalle.', { path: '/bk/press' }));
   return <PressPage  />;
 }
 
-export const Route = createFileRoute('/bkkk/press')({ component: PressPageRoute });
+export const Route = createFileRoute('/bk/press')({ component: PressPageRoute });

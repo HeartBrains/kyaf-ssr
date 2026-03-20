@@ -8,9 +8,9 @@ const AboutPage = lazy(() =>
 );
 
 function AboutPageRoute() {
-  useSEO(bkkkMeta('About', 'About Bangkok Kunsthalle.', { path: '/bkkk/about' }));
+  useSEO(bkkkMeta('History', 'The history of Bangkok Kunsthalle.', { path: '/bk/about/history' }));
   const navigate = useAppNavigate();
-  return <AboutPage onNavigate={navigate} activePage="about" />;
+  return <AboutPage onNavigate={navigate} activePage="history" />;
 }
 
-export const Route = createFileRoute('/bkkk/about/')({ component: AboutPageRoute });
+export const Route = createFileRoute('/bk/about/history')({ component: AboutPageRoute });

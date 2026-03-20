@@ -8,9 +8,9 @@ const TeamPage = lazy(() =>
 );
 
 function TeamPageRoute() {
-  useSEO(bkkkMeta('Team', 'The team behind Bangkok Kunsthalle.', { path: '/bkkk/team' }));
+  useSEO(bkkkMeta('Team', 'The team behind Bangkok Kunsthalle.', { path: '/bk/team' }));
   const navigate = useAppNavigate();
   return <TeamPage onNavigate={navigate} activePage="founder" />;
 }
 
-export const Route = createFileRoute('/bkkk/team')({ component: TeamPageRoute });
+export const Route = createFileRoute('/bk/team')({ component: TeamPageRoute });

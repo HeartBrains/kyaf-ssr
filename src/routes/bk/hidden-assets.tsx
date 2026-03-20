@@ -9,4 +9,4 @@ function HiddenAssetsPageRoute() {
   return <HiddenAssetsPage  />;
 }
 
-export const Route = createFileRoute('/bkkk/hidden-assets')({ component: HiddenAssetsPageRoute });
+export const Route = createFileRoute('/bk/hidden-assets')({ component: HiddenAssetsPageRoute });

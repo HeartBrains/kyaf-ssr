@@ -7,8 +7,8 @@ const SupportPage = lazy(() =>
 );
 
 function SupportPageRoute() {
-  useSEO(bkkkMeta('Support', 'Support Bangkok Kunsthalle.', { path: '/bkkk/support' }));
+  useSEO(bkkkMeta('Support', 'Support Bangkok Kunsthalle.', { path: '/bk/support' }));
   return <SupportPage  />;
 }
 
-export const Route = createFileRoute('/bkkk/support')({ component: SupportPageRoute });
+export const Route = createFileRoute('/bk/support')({ component: SupportPageRoute });

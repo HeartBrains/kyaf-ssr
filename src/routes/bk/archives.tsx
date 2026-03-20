@@ -9,10 +9,10 @@ const ArchivesPage = lazy(() =>
 );
 
 function ArchivesPageRoute() {
-  useSEO(bkkkMeta('Archives', 'Archives of Bangkok Kunsthalle.', { path: '/bkkk/archives' }));
+  useSEO(bkkkMeta('Archives', 'Archives of Bangkok Kunsthalle.', { path: '/bk/archives' }));
   const navigate = useAppNavigate();
   const search = useSearch({ strict: false }) as { sectionId?: string };
   return <ArchivesPage onNavigate={navigate} targetSectionId={search.sectionId} />;
 }
 
-export const Route = createFileRoute('/bkkk/archives')({ component: ArchivesPageRoute });
+export const Route = createFileRoute('/bk/archives')({ component: ArchivesPageRoute });

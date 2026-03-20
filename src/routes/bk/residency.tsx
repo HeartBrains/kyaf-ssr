@@ -9,10 +9,10 @@ const ResidencyPage = lazy(() =>
 );
 
 function ResidencyPageRoute() {
-  useSEO(bkkkMeta('Residency', 'Artist residency program at Bangkok Kunsthalle.', { path: '/bkkk/residency' }));
+  useSEO(bkkkMeta('Residency', 'Artist residency program at Bangkok Kunsthalle.', { path: '/bk/residency' }));
   const navigate = useAppNavigate();
   const search = useSearch({ strict: false }) as { sectionId?: string };
   return <ResidencyPage onNavigate={navigate} targetSectionId={search.sectionId} />;
 }
 
-export const Route = createFileRoute('/bkkk/residency')({ component: ResidencyPageRoute });
+export const Route = createFileRoute('/bk/residency')({ component: ResidencyPageRoute });

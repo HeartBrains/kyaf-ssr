@@ -7,8 +7,8 @@ const VisitPage = lazy(() =>
 );
 
 function VisitPageRoute() {
-  useSEO(bkkkMeta('Visit', 'How to visit Bangkok Kunsthalle.', { path: '/bkkk/visit' }));
+  useSEO(bkkkMeta('Visit', 'How to visit Bangkok Kunsthalle.', { path: '/bk/visit' }));
   return <VisitPage  />;
 }
 
-export const Route = createFileRoute('/bkkk/visit')({ component: VisitPageRoute });
+export const Route = createFileRoute('/bk/visit')({ component: VisitPageRoute });

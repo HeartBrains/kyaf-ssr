@@ -2,10 +2,10 @@ import { createFileRoute, useParams } from '@tanstack/react-router';
 import { lazy } from 'react';
 import { useAppNavigate } from '../../../bkkk/utils/useAppNavigate';
 import { useSEO, bkkkMeta } from '../../../lib/seo';
-import { useActivityBySlug } from '../../../lib/useWPData';
+import { useResidencyArtistBySlug } from '../../../lib/useWPData';
 
-const ActivityDetailPage = lazy(() =>
-  import('../../../bkkk/components/pages/ActivityDetailPage').then((m) => ({ default: m.ActivityDetailPage }))
+const ArtistDetailPage = lazy(() =>
+  import('../../../bkkk/components/pages/ArtistDetailPage').then((m) => ({ default: m.ArtistDetailPage }))
 );
 
 // Loader: fetches from WordPress REST API if env var is set, falls back to mock data.
@@ -23,22 +23,22 @@ async function fetchSlugData(slug: string, type: string, apiBase: string | undef
   }
 }
 
-function ActivityDetailPageRoute() {
+function ArtistDetailPageRoute() {
   const navigate = useAppNavigate();
   const { slug } = useParams({ strict: false }) as { slug: string };
-  const { data } = useActivityBySlug(slug, 'bkkk');
+  const { data } = useResidencyArtistBySlug(slug);
   const name = (data as any)?.title?.en ?? (data as any)?.name ?? slug;
   const desc = (data as any)?.listingSummary?.en ?? (data as any)?.bio ?? '';
   const img = (data as any)?.featuredImage ?? undefined;
-  useSEO(bkkkMeta(name, typeof desc === 'string' ? desc.replace(/<[^>]+>/g, '').slice(0, 160) : '', { path: `/bkkk/activities/${slug}`, image: img, type: 'article' }));
-  return <ActivityDetailPage onNavigate={navigate} slug={slug || 'liminal-signals'} backPage={undefined} />;
+  useSEO(bkkkMeta(name, typeof desc === 'string' ? desc.replace(/<[^>]+>/g, '').slice(0, 160) : '', { path: `/bk/artists/${slug}`, image: img, type: 'article' }));
+  return <ArtistDetailPage onNavigate={navigate} slug={slug} backPage={undefined} />;
 }
 
-export const Route = createFileRoute('/bkkk/activities/$slug')({
+export const Route = createFileRoute('/bk/artists/$slug')({
   loader: async ({ params }) => {
     const apiBase = import.meta.env.VITE_WP_BASE_URL;
-    const data = await fetchSlugData(params.slug, 'activity', apiBase);
+    const data = await fetchSlugData(params.slug, 'artist', apiBase);
     return { slug: params.slug, wpData: data };
   },
-  component: ActivityDetailPageRoute,
+  component: ArtistDetailPageRoute,
 });

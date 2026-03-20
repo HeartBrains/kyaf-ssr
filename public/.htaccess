@@ -1,5 +1,10 @@
 Options -MultiViews
 RewriteEngine On
+
+# Redirect old /bkkk prefix to /bk
+RewriteRule ^bkkk/(.*)$ /bk/$1 [R=301,L]
+RewriteRule ^bkkk$ /bk [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [QSA,L]
