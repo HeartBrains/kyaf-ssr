@@ -43,8 +43,9 @@ export const siteConfig = {
       past: true,
     },
     activities: {
-      publicProgram: true,
-      screenings: true,
+      current: true,
+      upcoming: true,
+      past: true,
     },
     residency: {
       upcoming: true,
