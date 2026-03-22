@@ -18,6 +18,7 @@ function galleryUrls(post: WPRawPost): string[] {
   return raw.split('|||').filter(Boolean);
 }
 
+
 // ─── BKKK Exhibition ─────────────────────────────────────────────────────────
 
 export function mapBkkkExhibition(post: WPRawPost) {
@@ -119,12 +120,19 @@ export function mapResidencyArtist(post: WPRawPost) {
     nameTH: m(post, 'title_th') || post.title.rendered,
     period: m(post, 'date_display_en'),
     periodTH: m(post, 'date_display_th') || m(post, 'date_display_en'),
+    role: m(post, 'role_en'),
+    roleTH: m(post, 'role_th') || m(post, 'role_en'),
     featuredImage: m(post, 'featured_image_url'),
     status: (m(post, 'status') || 'past') as 'current' | 'past' | 'upcoming',
     gallery: galleryUrls(post),
     imageCredits: m(post, 'image_credits'),
+    additionalInfo: m(post, 'additional_info'),
     bio: m(post, 'bio_en') || post.content.rendered,
     bioTH: m(post, 'bio_th') || m(post, 'bio_en') || post.content.rendered,
+    ctaLabel: m(post, 'cta_label'),
+    ctaUrl: m(post, 'cta_url'),
+    cta2Label: m(post, 'cta2_label'),
+    cta2Url: m(post, 'cta2_url'),
     site: m(post, 'site') as WPSite,
   };
 }

@@ -15,6 +15,7 @@ export interface RecordItem {
   endDate?: string;
   image: string;
   description?: string; // Short description/artist name
+  role?: string;
   location?: string;
   slug?: string;
 }
@@ -133,6 +134,7 @@ export async function fetchRecords(params?: {
       endDate: program.toDate,
       image: featuredImage,
       description: `${language === 'th' ? 'ภัณฑารักษ์: ' : 'Curated by '}${program.curator[language]}`,
+      role: `${language === 'th' ? 'ภัณฑารักษ์: ' : 'Curated by '}${program.curator[language]}`,
       slug: program.slug
     };
   });

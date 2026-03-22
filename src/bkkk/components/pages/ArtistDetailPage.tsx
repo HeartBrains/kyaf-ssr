@@ -137,12 +137,35 @@ export function ArtistDetailPage({ onNavigate, slug, backPage }: ArtistDetailPag
                     <h1 className={`text-xl md:text-2xl font-normal text-black ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
                         {displayName}
                     </h1>
-                    <p className={`text-xl md:text-2xl font-normal text-black ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
-                        {language === 'th' ? 'ศิลปินพำนัก' : 'Artist in Residence'}
-                    </p>
+                    {(artist.role || artist.roleTH) && (
+                        <p className={`text-xl md:text-2xl font-normal text-black ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
+                            {language === 'th' ? (artist.roleTH || artist.role) : artist.role}
+                        </p>
+                    )}
                     <p className={`text-xl md:text-2xl font-normal text-black ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
                         {displayPeriod.replace(/–/g, ' - ').replace(/\s+-\s+/g, ' - ')}
                     </p>
+
+                    {/* CTA 1 */}
+                    {artist.ctaLabel && artist.ctaUrl && (
+                        <a
+                            href={artist.ctaUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-6 inline-block text-sm font-normal text-black underline underline-offset-4 hover:opacity-60 transition-opacity"
+                        >
+                            {artist.ctaLabel}
+                        </a>
+                    )}
+
+                    {/* Additional Info */}
+                    {artist.additionalInfo && (
+                        <div className={`text-sm font-normal text-gray-500 mt-6 ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
+                            {artist.additionalInfo}
+                        </div>
+                    )}
+
+                    {/* Image Credits */}
                     {currentCredit && (
                         <div className={`text-sm md:text-base font-normal text-gray-500 mt-4 ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
                             {currentCredit.split('\n').map((line, i) => (
@@ -159,6 +182,18 @@ export function ArtistDetailPage({ onNavigate, slug, backPage }: ArtistDetailPag
                     className={`[&>p]:mb-8 [&>p]:text-2xl ${language === 'th' ? '[&>p]:leading-[1.82em]' : ''}`}
                     dangerouslySetInnerHTML={{ __html: detailContent }} 
                 />
+
+                {/* CTA 2 */}
+                {artist.cta2Label && artist.cta2Url && (
+                    <a
+                        href={artist.cta2Url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-8 inline-block text-sm font-normal text-black underline underline-offset-4 hover:opacity-60 transition-opacity"
+                    >
+                        {artist.cta2Label}
+                    </a>
+                )}
             </div>
         </div>
       </div>

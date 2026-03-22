@@ -8,9 +8,17 @@ export interface ArtistDetail {
   nameTH: string;
   period: string;
   periodTH: string;
+  role?: string;
+  roleTH?: string;
   featuredImage: string;
   status: 'current' | 'past' | 'upcoming';
   gallery: string[];
+  imageCredits?: string;
+  additionalInfo?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  cta2Label?: string;
+  cta2Url?: string;
 }
 
 export const ARTISTS_DATA: ArtistDetail[] = [
