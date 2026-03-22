@@ -165,6 +165,18 @@ export function ActivityDetailPage({ onNavigate, slug, backPage }: ActivityDetai
                         )}
                     </div>
                 </Reveal>
+
+                {/* Image Credits */}
+                {activityData.imageCredits && (
+                    <Reveal delay={0.1}>
+                        <div>
+                            {activityData.imageCredits.split('\n').map((line: string, i: number) => {
+                                const text = line.replace(/\|$/, '').trim();
+                                return text ? <p key={i} className="text-gray-500 text-[12px]">{text}</p> : null;
+                            })}
+                        </div>
+                    </Reveal>
+                )}
             </div>
 
             {/* Right Column - Text Content */}

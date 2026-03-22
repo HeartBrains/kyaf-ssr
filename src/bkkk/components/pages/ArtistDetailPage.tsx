@@ -144,9 +144,11 @@ export function ArtistDetailPage({ onNavigate, slug, backPage }: ArtistDetailPag
                         {displayPeriod.replace(/–/g, ' - ').replace(/\s+-\s+/g, ' - ')}
                     </p>
                     {currentCredit && (
-                        <p className={`text-sm md:text-base font-normal text-gray-500 mt-4 ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
-                            {currentCredit}
-                        </p>
+                        <div className={`text-sm md:text-base font-normal text-gray-500 mt-4 ${language === 'th' ? 'leading-[1.82em]' : ''}`}>
+                            {currentCredit.split('\n').map((line, i) => (
+                                <p key={i}>{line.replace(/\|$/, '').trim()}</p>
+                            )).filter((el) => (el.props.children as string).length > 0)}
+                        </div>
                     )}
                 </div>
             </div>
