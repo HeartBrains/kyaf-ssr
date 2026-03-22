@@ -189,9 +189,10 @@ export function ExhibitionDetailPage({ onNavigate, exhibition, slug, backPage }:
                     
                     {postData.acf?.imageCredits && (
                         <div className="mt-8 pt-6">
-                            <p className="text-gray-500 text-[12px]">
-                                {postData.acf.imageCredits}
-                            </p>
+                            {postData.acf.imageCredits.split('\n').map((line: string, i: number) => {
+                                const text = line.replace(/\|$/, '').trim();
+                                return text ? <p key={i} className="text-gray-500 text-[12px]">{text}</p> : null;
+                            })}
                         </div>
                     )}
                 </div>

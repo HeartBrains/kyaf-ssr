@@ -194,6 +194,18 @@ export function ExhibitionDetailPage({ onNavigate, slug, backPage }: ExhibitionD
                         </div>
                     </Reveal>
                 )}
+
+                {/* Image Credits */}
+                {exhibitionData.imageCredits && (
+                    <Reveal delay={0.15}>
+                        <div className="mt-4">
+                            {exhibitionData.imageCredits.split('\n').map((line, i) => {
+                                const text = line.replace(/\|$/, '').trim();
+                                return text ? <p key={i} className="text-gray-500 text-[12px]">{text}</p> : null;
+                            })}
+                        </div>
+                    </Reveal>
+                )}
             </div>
 
             {/* Right Column - Text Content */}
